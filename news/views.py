@@ -10,8 +10,7 @@ from rest_framework import permissions, viewsets, renderers
 from rest_framework.response import Response
 from .serializers import NewsSerializer
 from .models import news
+from django.shortcuts import render
 
-
-# class NewsViewSet(viewsets.ModelViewSet):
-#     queryset = news.objects.all()
-#     serializer_class = NewsSerializer
+def index(request):
+    return render(request,'index.html')

@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from news.urls import router as news_router
+from news.views import index
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^api/', include(news_router.urls)),
+    url(r'^$', index),
 ]
