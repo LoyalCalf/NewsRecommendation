@@ -1,0 +1,13 @@
+育碧《末日之战》PC版系统需求公布
+　　由育碧上海研发的汤姆克兰西系列作品《EndWar》(终结战争)终于准备来到PC玩家面前了，而对系统配置的要求是一个永恒不变的话题。
+　　根据官方公布的资料，该作品的最低需求为：
+　　● 操作系统：Windows XP (SP2)或Windows Vista (SP1)
+　　● 处理器：Core 2 Duo E4400或Athlon 64 X2 6000
+　　● 内存：XP 1GB；Vista 2GB
+　　● 显卡：支持DX9.0c和SM3.0、256MB显存
+　　当然最低需求只是说能让游戏跑起来，想流畅还得看推荐配置：
+　　● 操作系统：Windows XP (SP2)或Windows Vista (SP1)
+　　● 处理器：Core 2 Duo E6600、Core 2 Quad Q6600或Phenom X4 9850
+　　● 内存：XP/Vista 2GB
+　　● 显卡：支持DX9.0c和SM3.0、512MB显存
+

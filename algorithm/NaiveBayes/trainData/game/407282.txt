@@ -1,0 +1,7 @@
+NVIDIA考虑将PhysX植入OpenCL体系
+　　NVIDIA GPU PhysX物理加速技术的基础是其CUDA架构，而AMD日前在GDC 2009上展示的类似技术则是基于开放通用计算标准OpenCL，同时NVIDIA也是该标准的制定者和支持者之一。那么，PhysX今后何去何从呢？
+　　在发布物理技术开发包“NVIDIA APEX”之后的问答环节，NVIDIA PhysX产品经理Nadeem Mohammad接受了采访。在被问及PhysX是否可能会导入OpenCL的时候，他回应说不完全反对这个主意。他说，“就现在而言，CUDA工作得非常棒，(但)在未来我们也有可能使用OpenCL”，而且NVIDIA的显卡“架构也允许使用OpenCL等其他技术进行加速”。
+　　Mohammad表示：“NVIDIA与Khronos Group(OpenCL标准制定组织)的关系非常密切。事实上，本公司副总裁Neil Trevett就是这一组织的总裁，所以我们也在推动OpenCL标准，它确实是一个非常出色的技术规范。”
+　　大家也许还记得，NVIDIA在收购Ageia之初就公开表示，PhysX技术将面向业界开放，竞争对手也可以在其产品上使用，但也许是不愿受制 于人，AMD和Intel都没有接纳PhysX，反而宣传使用处理器进行物理加速才是未来之道。如果PhysX改而使用OpenCL这样的开发标准呢？是 不是意味着A卡也可以支持PhysX呢？
+　　Mohammad就此评论说：“如果我们开始使用OpenCL，那就(PhysX)有可能也可以工作在ATI(显卡)上，但我不清楚性能表现会如何…… (CUDA仅限N卡的好处就是)我们可以只针对NVIDIA GPU进行测试、认证和服务，不必使之适合每个人，所以这是我们现在以及未来转向OpenCL时的小小忧虑。我真的担心(那样将)如何把好质量关。就现在 而言，CUDA是为GeForce(显卡)进行加速而生的，开发人员喜欢这样，实际表现也非常好。”
+

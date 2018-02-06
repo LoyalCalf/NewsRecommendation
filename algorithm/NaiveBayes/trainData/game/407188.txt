@@ -1,0 +1,8 @@
+PC版《最后的神迹》配置需求公布(图)
+　　由史克威尔·艾尼克斯负责开发的RPG大作《最后的神迹》（The Last Remnant）PC版即将于4月9日在日本发售，售价为8,190日元（90美元）
+　　游戏采用“Unreal Engine 3”次世代3D游戏引擎所开发，以细致美丽的即时3D绘图方式呈现出独特的奇幻游戏世界；游戏融合中古欧洲与蒸气庞克风格的世界观设定，有4个种族活跃于此世界中，同时并有由远古所流传下来、被称为“遗迹（Remnant）”的物体遍布在世界各地，人类的城镇基本上是围绕著遗迹建立，最初展开冒险的阿斯兰姆是以巨大的剑型遗迹为中心，之后还将遇到包括巨型昆虫遗迹、巨型水球遗迹等不同遗迹。
+　　游戏最低配置需求：
+　　系统: Windows XP SP2 或 Windows Vista SP1 　　CPU: Intel Core 2 Duo (2GHz) 或 AMD Athlon X2 (2GHz) 　　内存: 1.5GB 　　硬盘: 15GB 预留空间 　　显卡: Nvidia GeForce 8600 256MB 　　DVD 光驱: Dual Layer DVD-ROM
+　　游戏推荐配置：
+　　系统: Windows Vista SP1 　　CPU: Intel Core 2 Duo (2.4GHz) 或 AMD Athlon X2 (2.4GHz) 　　内存: 2GB 　　硬盘: 15GB 预留空间　　显卡: Nvidia GeForce 8800 512MB 　　DVD 光驱: Dual Layer DVD-ROM
+

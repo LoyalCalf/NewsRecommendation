@@ -1,0 +1,5 @@
+THQ为新作购买高端动画引擎morpheme
+　　NaturalMotion是一家研究图形引擎中间件的公司，今天NaturalMotion宣布THQ已经购买了他们开发的业界高端动画引擎morpheme。THQ计划将morpheme引擎应用到未来的新游戏开发中，据说本作是由Kaos Studios负责开发。THQ最近也购买了NVIDIA PhysX技术，这样一来业界最为领先的动画引擎和物理引擎一旦结合，创造力非常惊人。
+　　morpheme是第一款绘画创作动画引擎，适合运行于Playstation 3、 Xbox 360和PC上。它可以使动画设计师控制游戏动画的最终画面效果。morpheme包含一个动画运行时间引擎和一个功能强大的动画创作应用程序。时间运行引擎是一款次世代动画引擎，特点包括：现今的混合技术、登记动画状态机、IK支持、物理支持和压缩运算法则。
+　　Kaos Studios是THQ的内部工作室，曾经开发出《前线：战争燃料》，是THQ旗下第一家使用morpheme的工作室。目前他们正在开发一款新作，现在还处于保密阶段。
+

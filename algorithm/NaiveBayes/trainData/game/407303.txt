@@ -1,0 +1,37 @@
+OpenGL创始公司SGI被2500万美元收购
+　　OpenGL对于电脑游戏玩家来说并不是一个陌生的名词，至少当年玩过反恐精英的玩家都会在游戏设置里面看到一个OpenGL项目，那时的游戏设置界面还比较简单。OpenGL的创始公司Silicon Graphics在1992年开发了知名的2D/3D图形应用程序编程接口（API）OpenGL。OpenGL在数字图形领域有着广泛的应用，到今天OpenGL标准的生命力仍旧顽强，而Silicon Graphics就不那么走运了。
+　　据国外媒体报道，负债高达5亿美元的Silicon Graphics公司，被Rackable Systems以2500万美元收购，后者将负担部分Silicon Graphics的债务。Rackable Systems收购Silicon Graphics公司的目的是，增强其高性能集群和云计算业务。按照美国破产法，SGI周三在纽约提交了破产申请。所以这桩资产收购交易需要经破产法庭批准后才能生效。
+　　SGI公司历程：
+　　1982年
+　　斯坦福大学Jim Clark教授离开大学开发三维计算机图形技术，创办了Silicon Graphics
+　　1984年
+　　推出第一台高端三维工作站计算机
+　　1986年
+　　首次公开募股1720万美元
+　　1992年
+　　2280万美元购买芯片制造商MIPS Computer Systems
+　　1995年
+　　收购图形软件公司Alias Research and Wavefront Technologies，花费5亿
+　　1996年
+　　7.4亿收购超级计算机公司Cray Research
+　　1997年
+　　总收入达到36.6亿
+　　1998年
+　　Rick Belluzzo离开惠普成为SGI首席执行官，公司售出了MIPS公司
+　　1999年
+　　Rick Belluzzo突然辞职，加入微软
+　　2000年
+　　售出Cray Research，售出价格2200万美元
+　　2003年
+　　公司迁出Mountain View的总部，建筑物租给了Google
+　　2004年
+　　售出Alias Systems，售价5800万美元
+　　2005年
+　　今年7月，公司被纽约证券交易所除名
+　　2006年5月
+　　申请破产保护
+　　2008年8月28日
+　　2008财年的收入降为前一年的24%
+　　2008年12月2日
+　　纳斯达克警告，因为该公司的财务问题，Silicon Graphics有可能会被除名。
+

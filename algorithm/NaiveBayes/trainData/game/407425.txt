@@ -1,0 +1,13 @@
+NVIDIA新推出Windows 7 WHQL认证驱动
+　　Windows 7的推出可让Windows操作系统大幅提升运用图形处理器（GPU）提供更棒使用体验的能力。在Windows 7发布release candidate版本之际，NVIDIA率先针对桌面型电脑及笔记型电脑发布全新WHQL（Windows硬件品质实验室）认证的图形驱动程序。
+　　通过GPU的图形著色与平行运算技术，拥有DirectX Compute功能的Windows 7操作系统不但可以在外观和功能上提供更佳的清晰度与焦点，确保最优异的桌面使用经验，更可以用惊人的速度与反应时间带给消费者愉快的使用体验。
+　　NVIDIA公司软件研发工程副总裁Dwight Diercks表示：“Windows 7的使用者现在绝对拥有最先进的性能，以及对SLI、PhysX、3D Vision与DirectX Compute等功能的所有支持。使用者现在大可以放心，因为不论是在Windows 7操作环境中运行游戏、影片格式转换，以及获得整体更棒的运算体验都不是问题，因为我们拥有正宗的微软WHQL认证，这是最好的保证。”
+　　185.85版本的WHQL认证驱动程序支持微软的全新Windows 7显示驱动程序WDDMv1.1。通过NVIDIA DirectX 10 GPU的强大威力，WDDMv1.1驱动程序可以带给Windows 7使用者优质的视觉体验。
+GeForce/ION 185.85 WHQL多国语言正式版下载：
+Windows XP/XP MCP
+Windows XP Pro 64-bit
+Windows Vista 32-bit
+Windows Vista 64-bit
+Windows 7 32-bit
+Windows 7 64-bit
+

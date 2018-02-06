@@ -1,0 +1,7 @@
+下一代《战地》新作全部采用DX11引擎
+　　DICE渲染架构师Johan Anderson披露，新款“战地”游戏所使用的引擎“Frostbite Engine”已经导入了DirectX 11。
+　　Frostbite是一款同时支持PC、PS3和X360的跨平台引擎，而PC版独有DX10渲染路径，支持DX10.0和DX10.1特性。Anderson称，从DX10到DX11的实际导入过程花费了三个小时，其中在代码里搜索和替换相关部分最耗时间。
+　　Forstbite引擎结合DX11技术，可利用HDR纹理压缩、Compute Shader、硬件细分曲面(Hardware Tesselation)等来渲染人物和地形。
+　　由于现在还没有硬件支持DX11的显卡和合适的开发软件，所以DICE在Frostbite的编译器里提供了一个开关，可以在DX10和DX11两种模式之间切换。开发人员确信，通过使用DX11驱动，API调用期间的处理器负载能明显降低，自然有助于提高系统性能。
+　　首款基于Frostbite引擎的游戏是《战地：叛逆连队》，其续作《战地：叛逆连队2》以及《战地1943：太平洋》也都会沿用这一引擎。
+

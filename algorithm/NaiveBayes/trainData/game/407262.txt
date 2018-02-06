@@ -1,0 +1,12 @@
+OpenGL 3.1规范公布 支持GLSL 1.40
+　　在OpenGL 3.0规范发布七个多月之后，Khronos Group今天又公布了升级版新规范OpenGL 3.1，也是这套跨平台免费API有史以来的第九次更新。
+　　OpenGL 3.1将此前引入的OpenGL着色语言“GLSL”从1.30版升级到了1.40版，通过改进程序增强了对最新可编程图形硬件的访问，还有更高效的顶点处理、扩展的纹理功能、更弹性的缓冲管理等等。宽泛地讲，OpenGL 3.1在3.0版的基础上对整个API模型体系进行了简化，可大幅提高软件开发效率。
+　　OpenGL 3.1主要新特性：Texture Buffer Objects(纹理缓冲对象)、Uniform Buffer Objects(统一缓冲对象)、Signed Normalized Textures(符号正常化纹理)、Primitive Restart(基本元素重启)、Instancing(实例化)、CopyBuffer API(拷贝缓冲接口)……
+　　与OpenGL 3.1规范同步，OpenGL架构评审委员会(ARB)也发布了一个兼容性扩展，能让开发人员在访问OpenGL 3.1里已经删除的OpenGL 1.x/2.x功能，确保应用程序的全面向下兼容性。
+　　OpenGL 3.1公布后，业界图形厂商很快予以了大力支持。AMD OpenGL主管Suki Samra表示：“AMD全面用户OpenGL API，会在今后的Radeon和FirePro产品驱动程序中支持OpenGL 3.1。”NVIDIA市场营销副总裁Dan Vivoli表示：“NVIDIA承诺尽快部署OpenGL 3.1，我们也很自豪地在规范公布同一天放出了自己的测试版驱动程序。”
+　　市场调研机构Jon Peddie Research预测，OpenGL 3.1规范图形硬件的安装规模将超过1亿。AMD、NVIDIA、S3 Graphics的显卡驱动目前都已经支持OpenGL 3.0。
+　　相关文档：
+OpenGL 3.1规范
+OpenGL 3.1规范(ARB兼容扩展)
+OpenGL着色语言GLSL 1.40
+
