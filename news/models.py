@@ -18,6 +18,7 @@ class news(models.Model):
     image = models.CharField(max_length=1000,blank=True,null=True)
     tag = models.CharField(max_length=1000,blank=True,null=True)
     classification = models.CharField(max_length=20,blank=True,null=True)   #爬取新闻的分类
+    is_predict = models.BooleanField(default=False)                  #是否预测过其分类
 
     class Meta():
         ordering = ['-pubtime']

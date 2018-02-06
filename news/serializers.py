@@ -4,7 +4,6 @@
 # @FileName: serializers.py
 # @Software: PyCharm
 
-from __future__ import unicode_literals, absolute_import
 import json
 
 from django.contrib.auth.models import User
@@ -21,5 +20,5 @@ class NewsSerializer(serializers.ModelSerializer):
     # newsProfile = NewsProfileSerializer()
     class Meta:
         model = news
-        fields = ('news_id', 'news_link', 'source', 'title', 'abstract','tag','classification')
+        fields = ('news_id', 'news_link', 'source', 'pubtime','title', 'abstract','tag','classification')
 
