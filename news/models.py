@@ -25,20 +25,24 @@ class news(models.Model):
 
 class news_tag_score(models.Model):
     news = models.OneToOneField(news,on_delete=models.CASCADE,primary_key=True)
+
+    news_entertainment = models.FloatField(default=0,null=False)
+    news_fashion = models.FloatField(default=0, null=False)
+    news_finance = models.FloatField(default=0, null=False)
+    news_game = models.FloatField(default=0, null=False)
+    news_sports = models.FloatField(default=0, null=False)
     news_society = models.FloatField(default=0,null=False)
     news_tech = models.FloatField(default=0,null=False)
-    news_entertainment = models.FloatField(default=0,null=False)
-    news_game = models.FloatField(default=0,null=False)
-    news_sports = models.FloatField(default=0,null=False)
-    news_car = models.FloatField(default=0,null=False)
-    news_finance = models.FloatField(default=0,null=False)
-    news_funny = models.FloatField(default=0,null=False)
-    news_military = models.FloatField(default=0,null=False)
-    news_world = models.FloatField(default=0,null=False)
-    news_fashion = models.FloatField(default=0,null=False)
-    news_baby = models.FloatField(default=0,null=False)
-    news_history = models.FloatField(default=0,null=False)
-    news_food = models.FloatField(default=0,null=False)
+
+    # news_car = models.FloatField(default=0,null=False)
+    #
+    # news_funny = models.FloatField(default=0,null=False)
+    # news_military = models.FloatField(default=0,null=False)
+    # news_world = models.FloatField(default=0,null=False)
+    #
+    # news_baby = models.FloatField(default=0,null=False)
+    # news_history = models.FloatField(default=0,null=False)
+    # news_food = models.FloatField(default=0,null=False)
 
 class news_comment(models.Model):
     content = models.TextField(null=False)

@@ -51,12 +51,12 @@ class MysqlTwistPipeline(object):
 
     #处理异步的异常
     def handle_error(self,failure):
-        # print('failure')
+        print('failure')
         pass
 
     def do_insert(self,cursor,item):
         insert_sql = """
                     insert into news_news(news_link,source,title,pubtime,abstract,content,
-                    html_content,image,tag,classification)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    html_content,image,tag,classification,is_predict)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                     """
-        cursor.execute(insert_sql, (item['news_link'], item['source'], item['title'], item['pubtime'],item['abstract'], item['content'], item['html_content'],item['image'], item['tag'],item['classification']))
+        cursor.execute(insert_sql, (item['news_link'], item['source'], item['title'], item['pubtime'],item['abstract'], item['content'], item['html_content'],item['image'], item['tag'],item['classification'],0))

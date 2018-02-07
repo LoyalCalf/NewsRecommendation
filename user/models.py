@@ -38,22 +38,25 @@ class user_behavior(models.Model):
     class Meta():
         ordering = ['-behavior_time']
 
-class user_tag(models.Model):
+class user_tag_score(models.Model):
     user = models.OneToOneField(User, primary_key=True,related_name='tag')
+    news_entertainment = models.FloatField(default=0,null=False)
+    news_fashion = models.FloatField(default=0, null=False)
+    news_finance = models.FloatField(default=0, null=False)
+    news_game = models.FloatField(default=0, null=False)
+    news_sports = models.FloatField(default=0, null=False)
     news_society = models.FloatField(default=0,null=False)
     news_tech = models.FloatField(default=0,null=False)
-    news_entertainment = models.FloatField(default=0,null=False)
-    news_game = models.FloatField(default=0,null=False)
-    news_sports = models.FloatField(default=0,null=False)
-    news_car = models.FloatField(default=0,null=False)
-    news_finance = models.FloatField(default=0,null=False)
-    news_funny = models.FloatField(default=0,null=False)
-    news_military = models.FloatField(default=0,null=False)
-    news_world = models.FloatField(default=0,null=False)
-    news_fashion = models.FloatField(default=0,null=False)
-    news_baby = models.FloatField(default=0,null=False)
-    news_history = models.FloatField(default=0,null=False)
-    news_food = models.FloatField(default=0,null=False)
+
+    # news_car = models.FloatField(default=0,null=False)
+    #
+    # news_funny = models.FloatField(default=0,null=False)
+    # news_military = models.FloatField(default=0,null=False)
+    # news_world = models.FloatField(default=0,null=False)
+    #
+    # news_baby = models.FloatField(default=0,null=False)
+    # news_history = models.FloatField(default=0,null=False)
+    # news_food = models.FloatField(default=0,null=False)
 
 class user_search(models.Model):
     user = models.ForeignKey(User,related_name='search')
@@ -64,4 +67,18 @@ class user_search(models.Model):
     class Meta():
         ordering = ['-date_created']
 
+#维护一张相似用户矩阵表，离线更新表，避免在线进行大量的计算
+class user_similarity(models.Model):
+    user = models.OneToOneField(User,primary_key=True,related_name='similaryity')
+    similary_user = models.TextField(null=True)     #和user相似的用户，用，隔开
+    date_created = models.DateTimeField(auto_now_add=True)      #更新的时间
 
+
+#保存推荐给用户资讯，避免重复推荐
+class user_recommendation(models.Model):
+    user = models.ForeignKey(User,related_name='recommendation')
+    news = models.ForeignKey(news,null=False)         #推荐过的新闻id
+    date_created = models.DateTimeField(auto_now_add=True)     #推荐的时间
+
+    class Meta():
+        ordering = ['-date_created']

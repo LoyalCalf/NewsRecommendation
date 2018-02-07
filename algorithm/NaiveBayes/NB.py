@@ -15,7 +15,6 @@ from sklearn.externals import joblib
 
 Parameters:
 	folder_path - 文本存放的路径
-	test_size - 测试集占比，默认占所有数据集的百分之20
 Returns:
 	all_words_list - 按词频降序排序的训练集列表
 	train_data_list - 训练集列表
@@ -124,7 +123,7 @@ def words_dict(all_words_list, stopwords_set=set()):
     feature_words = []  # 特征列表
     n = 1
     for t in range(0, len(all_words_list), 1):
-        if n > 1000:							#feature_words的维度为1000
+        if n > 5000:							#feature_words的维度为5000
             break
         # 如果这个词不是数字，并且不是指定的结束语，并且单词长度大于1小于5，那么这个词就可以作为特征词
         if not all_words_list[t].isdigit() and all_words_list[t] not in stopwords_set and 1 < len(
