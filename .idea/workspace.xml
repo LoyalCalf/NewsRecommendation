@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1c536b3-4e04-4ece-b11d-5ae0274aeb6b" name="Default" comment="初步完成朴素贝叶斯算法">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/news/migrations/0007_auto_20180207_1625.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/user/migrations/0003_auto_20180207_1625.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/algorithm/LatentFactor/LatentFactor.py" afterPath="" />
+    <list default="true" id="f1c536b3-4e04-4ece-b11d-5ae0274aeb6b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewsRecommendation/settings.py" afterPath="$PROJECT_DIR$/NewsRecommendation/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/NB.py" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/NB.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/NaiveBayesPredict.py" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/NaiveBayesPredict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/trainModel/feature_words.m" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/trainModel/feature_words.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/trainModel/trainModel.m" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/trainModel/trainModel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/models.py" afterPath="$PROJECT_DIR$/news/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spiders/ChinaNews/ChinaNews/pipelines.py" afterPath="$PROJECT_DIR$/spiders/ChinaNews/ChinaNews/pipelines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spiders/ChinaNews/log.txt" afterPath="$PROJECT_DIR$/spiders/ChinaNews/log.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/models.py" afterPath="$PROJECT_DIR$/user/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -740,7 +728,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517903344856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="初步完成基于内容的推荐算法">
+      <created>1517998949443</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1517998949443</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -778,7 +773,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="新增文件" />
     <MESSAGE value="初步完成朴素贝叶斯算法" />
-    <option name="LAST_COMMIT_MESSAGE" value="初步完成朴素贝叶斯算法" />
+    <MESSAGE value="初步完成基于内容的推荐算法" />
+    <option name="LAST_COMMIT_MESSAGE" value="初步完成基于内容的推荐算法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -895,6 +891,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -902,6 +899,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
