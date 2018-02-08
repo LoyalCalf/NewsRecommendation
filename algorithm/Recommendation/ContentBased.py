@@ -37,9 +37,7 @@ def update_data(user_id,news_id):
 
 #余弦相似度，用于计算两个资讯间的相似度
 def cosine_similarity(x,y):
-    one = np.array(x)
-    two = np.array(y)
-    num = sum(np.multiply(one,two))
+    num = sum(np.multiply(np.array(x),np.array(y)))
     denom = np.linalg.norm(x)*np.linalg.norm(y)
     return round(num/float(denom),3)
 

@@ -25,7 +25,7 @@ def get_data_dict():
     # cur.close()
     # conn.close()
 
-    datas = news.objects.filter(is_predict=0).values_list()
+    datas = news.objects.filter(is_predict=1).values_list()
 
     data_dict = {}
     for data in datas:
@@ -36,10 +36,16 @@ def get_data_dict():
     return data_dict
 
 def update_data(dic):
-
-    news_tag_score.objects.create(**dic)
-
+    """存在就更新，不存在就插入"""
     news.objects.filter(news_id=dic['news_id']).update(is_predict=1)
+    newsinfo = news_tag_score.objects.filter(news_id=dic['news_id'])
+    if newsinfo.exists():
+        dic.pop('news_id')
+        newsinfo.update(**dic)
+    else:
+        news_tag_score.objects.create(**dic)
+
+
 
 
 def TextFeatures(data_dict,feature_words):
@@ -70,11 +76,8 @@ def NBpredict():
         dic = {'news_id':k,'news_entertainment':proba[0],'news_fashion':proba[1],'news_finance':proba[2],'news_game':proba[3],'news_society':proba[4],'news_sports':proba[5],'news_tech':proba[6]}
         update_data(dic)
 
-    # p = clf.predict_proba([feature_dict[42]])
-    # print(p)
-
-    # for i in feature_dict:
 
 
 if __name__=='__main__':
+
     NBpredict()
