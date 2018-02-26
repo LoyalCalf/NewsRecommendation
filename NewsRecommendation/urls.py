@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from news.urls import router as news_router
-from news.views import index
+# from news.urls import router as news_router
+
+
+# from news.api import ContentBaseRecommendationNews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^api/', include(news_router.urls)),
-    url(r'^$', index),
+    url(r'^api/', include('news.urls')),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
 ]

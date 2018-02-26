@@ -63,6 +63,8 @@ class CalculateSimilarityUser(object):
         molecular = sum_xy - (float(sum_x) * float(sum_y) / n)
         # 计算Pearson相关系数，molecular为分子，denominator为分母
         denominator = sqrt((sum_x2 - float(sum_x ** 2) / n) * (sum_y2 - float(sum_y ** 2) / n))
+        if denominator==0:
+            return 0
         return molecular / denominator
 
     """计算相似的用户，并更新到数据库中，k为最相似的k个用户"""
@@ -97,6 +99,7 @@ class CalculateSimilarityUser(object):
             for j in sorted_list[:k]:
                 similary_user += str(j[0]) + ','
             similarity_user_dict = {'user_id':user_id,'similary_user':similary_user[:-1]}
+            print(similarity_user_dict)
             self.update_data(similarity_user_dict)
 
 """根据数据库中的相似用户表进行推荐"""
@@ -119,7 +122,6 @@ class UserCF_Recommendation(object):
             similary_user_set = set()
             #取出和该用户相似的用户id
             similary_user_list = user[0].similary_user.split(',')
-            #默认返回两天前的时间
 
             for similary_user in similary_user_list:
 
@@ -129,17 +131,14 @@ class UserCF_Recommendation(object):
 
             #取差集，即推荐的资讯id集合
             difference_set = similary_user_set.difference(user_set)
-
+            # print(difference_set)
             return difference_set
-
         else:
             return None
 
 
 
 if __name__=='__main__':
-    pass
-
-
-
+    # CalculateSimilarityUser().similarity_user()
+    UserCF_Recommendation().get_data(2)
     # print(3.32780127197021e-59**2)

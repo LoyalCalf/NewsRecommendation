@@ -25,7 +25,7 @@ def get_data_dict():
     # cur.close()
     # conn.close()
 
-    datas = news.objects.filter(is_predict=1).values_list()
+    datas = news.objects.filter(is_predict=0).values_list()
 
     data_dict = {}
     for data in datas:

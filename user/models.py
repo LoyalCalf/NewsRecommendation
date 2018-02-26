@@ -70,7 +70,7 @@ class user_search(models.Model):
 #维护一张相似用户矩阵表，离线更新表，避免在线进行大量的计算
 class user_similarity(models.Model):
     user = models.OneToOneField(User,primary_key=True,related_name='similaryity')
-    similary_user = models.TextField(null=True)     #和user相似的用户，用，隔开
+    similary_user = models.CharField(null=True,max_length=1000)     #和user相似的用户，用，隔开
     date_created = models.DateTimeField(auto_now_add=True)      #更新的时间
 
 

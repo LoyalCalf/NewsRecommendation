@@ -73,8 +73,6 @@ Returns:
 	words_set - 读取的内容的set集合
 
 """
-
-
 def MakeWordsSet(words_file):
     words_set = set()  # 创建set集合
     with open(words_file, 'r', encoding='utf-8') as f:  # 打开文件

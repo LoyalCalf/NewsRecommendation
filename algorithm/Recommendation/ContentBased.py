@@ -13,18 +13,29 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "NewsRecommendation.settings")
 django.setup()
 from news.models import news_tag_score, news
 from user.models import user_recommendation
+from datetime import datetime,timedelta
 
-def get_data(user_id,news_id):
+def get_days_before_today(days=100):
+    return datetime.now() - timedelta(days=days)
+
+def get_data(user_id,news_id,classification=None):
 
     #可以取出 当天资讯（考虑时间因素），过滤掉已经推荐过给用户的资讯（去重因素）
     news_recommendation = user_recommendation.objects.filter(user_id=user_id)
-    news_recommendation_list = []    #推荐过的news_id列表
-    for i in news_recommendation:
-        news_recommendation_list.append(i.news_id)
+    news_today = news.objects.filter(pubtime__range=[get_days_before_today(),datetime.now()]).order_by('-pubtime')
+    if classification:
+        news_list = news_today.filter(classification=classification).values_list('news_id',flat=True)
+    else:
+        news_list = news_today.values_list('news_id',flat=True)
+
+    news_recommendation_list = [i.news_id for i in news_recommendation]    #推荐过的news_id列表
+    # for i in news_recommendation:
+    #     news_recommendation_list.append(i.news_id)
     news_recommendation_list.append(news_id)
 
+
     news_data = news_tag_score.objects.filter(news_id=news_id).values_list()
-    other_news_data = news_tag_score.objects.exclude(news_id__in=news_recommendation_list).values_list()
+    other_news_data = news_tag_score.objects.filter(news_id__in=news_list).exclude(news_id__in=news_recommendation_list).values_list()
 
     return news_data,other_news_data
 
@@ -42,8 +53,10 @@ def cosine_similarity(x,y):
     return round(num/float(denom),3)
 
 #根据用户id，资讯id，推荐10条和此资讯最相似的资讯
-def ContentBasedRecommendation(user_id,news_id):
-    news_data,other_news_data = get_data(user_id,news_id)
+def ContentBasedRecommendation(user_id,news_id,classification=None):
+    #资讯的类别，如果为空则取出所有类型的资讯
+
+    news_data,other_news_data = get_data(user_id,news_id,classification)
     #当前资讯的特征值行向量
     news_matrix = list(news_data[0][1:])
     #取出的资讯特征值字典 如 1:[0.1,0.2....]
@@ -70,9 +83,9 @@ def ContentBasedRecommendation(user_id,news_id):
         update_data(user_id,k[0])
         count += 1
 
-    # print(recommendation_list)
+    print(recommendation_list)
     return recommendation_list
 
 if __name__=='__main__':
 
-    ContentBasedRecommendation(1,1)
+    ContentBasedRecommendation(6,40452,'时政')
