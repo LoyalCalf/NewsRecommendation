@@ -62,3 +62,9 @@ class news_profile(models.Model):
     liked_count = models.IntegerField(null=False,default=0)
     dislike_count = models.IntegerField(null=False,default=0)
     collected_count = models.IntegerField(null=False,default=0)
+
+class news_hot(models.Model):
+    """
+    热点新闻纪录，纪录哪些新闻曾
+    """
+    news = models.ForeignKey(news,on_delete=models.CASCADE)

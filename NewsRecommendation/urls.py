@@ -15,15 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-# from news.urls import router as news_router
+from news.views import index
+from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
+
+schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
 # from news.api import ContentBaseRecommendationNews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
+    url(r'^$',index),
+
+    url(r'^docs/', schema_view, name="docs"),
     url(r'^api/', include('news.urls')),
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
+    url(r'^api/', include('user.urls')),
+    url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
+
 ]

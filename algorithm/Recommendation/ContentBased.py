@@ -83,7 +83,7 @@ def ContentBasedRecommendation(user_id,news_id,classification=None):
         update_data(user_id,k[0])
         count += 1
 
-    print(recommendation_list)
+    # print(recommendation_list)
     return recommendation_list
 
 if __name__=='__main__':

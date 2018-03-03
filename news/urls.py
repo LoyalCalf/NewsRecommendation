@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^news_finance/', views.NewsRecommendationFinance.as_view()),
     url(r'^news_fashion/', views.NewsRecommendationFashion.as_view()),
 
+    url(r'^news_search/', include('haystack.urls')),
+
 ]

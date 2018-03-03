@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2018/2/1 15:56
 # @Author  : 陈强
-# @FileName: serializers.py
+# @FileName: views.py
 # @Software: PyCharm
 
 from django.contrib.auth.models import User
@@ -17,8 +17,8 @@ from rest_framework import generics
 from algorithm.Recommendation import UserCF,ContentBased
 
 
-# def index(request):
-#     return render(request,'index.html')
+def index(request):
+    return render(request,'index.html')
 
 
 class NewsList(generics.ListCreateAPIView):
@@ -173,4 +173,46 @@ class NewsRecommendationFashion(APIView):
             return Response(serializer.data)
         else:
             res = {'msg':'用户未登陆','code':300}
+            return Response(res)
+
+
+class NewsComments(APIView):
+    """
+    资讯评论
+    """
+
+    def get(self,request):
+        """
+        获取评论
+        :param request:
+        :return:
+        """
+
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user.username)
+
+        else:
+            res = {'msg':'用户未登陆','code':300}
+            return Response(res)
+        pass
+
+    def post(self,request):
+        """
+        用户评论
+        :param request:
+        :return:
+        """
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user.username)
+            user_id = user.id
+            try:
+                content = request.POST['content']
+                news_id = request.POST['news_id']
+
+            except:
+                return Response({'msg': '参数错误', 'code': 300})
+
+
+        else:
+            res = {'msg': '用户未登陆', 'code': 300}
             return Response(res)
