@@ -6,3 +6,4 @@ from django.contrib.auth.models import User
 admin.site.register(user_tag_score)
 admin.site.register(user_behavior)
 admin.site.register(user_recommendation)
+admin.site.register(user_profile)

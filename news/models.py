@@ -45,26 +45,38 @@ class news_tag_score(models.Model):
     # news_food = models.FloatField(default=0,null=False)
 
 class news_comment(models.Model):
+    #id:自增id
+
     content = models.TextField(null=False)
     comment_time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User,on_delete=models.PROTECT,related_name='comment_user')
-    news = models.ForeignKey(news,on_delete=models.CASCADE)
-    parent_user = models.ForeignKey(User,on_delete=models.PROTECT,null=True,related_name='reply_user')
-    root_user = models.ForeignKey(User,on_delete=models.PROTECT,null=True,related_name='root_user')
+    user = models.ForeignKey(User,on_delete=models.PROTECT,related_name='user_comment')     #评论的用户
+    news = models.ForeignKey(news,on_delete=models.CASCADE,related_name='comment')
+    parent_user = models.ForeignKey(User,on_delete=models.PROTECT,blank=True,null=True,related_name='reply_user')      #是否回复某人
+    root_id = models.IntegerField(default=-1)         #根评论，某条评论下是否还有评论
+    reply_count = models.IntegerField(default=0)      #某条评论下回复的数量，默认为0
 
     class Meta():
         ordering = ['-comment_time']
 
 class news_profile(models.Model):
-    news = models.OneToOneField(news,on_delete=models.CASCADE,primary_key=True)
+    news = models.OneToOneField(news,on_delete=models.CASCADE,primary_key=True,related_name='news_profile')
     viewed_count = models.IntegerField(null=False,default=0)
     comment_count = models.IntegerField(null=False,default=0)
     liked_count = models.IntegerField(null=False,default=0)
     dislike_count = models.IntegerField(null=False,default=0)
     collected_count = models.IntegerField(null=False,default=0)
+    pubtime = models.DateTimeField(blank=True,null=True)
+    # class Meta():
+    #     ordering = ['-viewed_count','liked_count']
 
 class news_hot(models.Model):
     """
     热点新闻纪录，纪录哪些新闻曾
     """
-    news = models.ForeignKey(news,on_delete=models.CASCADE)
+    news = models.OneToOneField(news,on_delete=models.CASCADE,primary_key=True)
+    score = models.FloatField(default=0)
+    pubtime = models.DateTimeField(blank=True, null=True)   #新闻发布时间
+    date_created = models.DateTimeField(auto_now_add=True)   #成为热点新闻的时间
+    classification = models.CharField(max_length=20,blank=True, null=True)
+    class Meta():
+        ordering = ['-score','-pubtime']

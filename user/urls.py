@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^user_behavior/$', views.UserBehavior.as_view()),
     url(r'^user_login/$', views.Login.as_view()),
     url(r'^user_register/$', views.Register.as_view()),
+    url(r'^user_profile/$', views.UserProfileSetting.as_view()),
+
 ]

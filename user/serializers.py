@@ -7,10 +7,10 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from news.models import news
+from user.models import user_profile
 
-# class UserSerializer(serializers.ModelSerializer):
-#     news = serializers.PrimaryKeyRelatedField(many=True, queryset=news.objects.all())
-#
-#     class Meta:
-#         model = User
-#         fields = ('id', 'username', 'news')
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = user_profile
+        fields = '_all_'

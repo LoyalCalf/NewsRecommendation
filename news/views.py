@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, renderers
 
 from rest_framework.response import Response
-from .serializers import NewsAbstractSerializer,NewsContentSerializer
-from .models import news
+from .serializers import NewsAbstractSerializer,NewsContentSerializer,NewsCommentSerializer
+from .models import news,news_profile,news_hot,news_comment
 from user.models import user_behavior
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -31,6 +31,18 @@ class NewsList(generics.ListCreateAPIView):
 class NewsContent(generics.RetrieveUpdateDestroyAPIView):
     queryset = news.objects.all()
     serializer_class = NewsContentSerializer
+
+# class NewsHot(generics.ListCreateAPIView):
+#     queryset = news_hot.objects.all()
+#     serializer_class = NewsHotSerializer
+#
+#     def get(self, request, *args, **kwargs):
+#         try:
+#             classification = request.GET['classification']
+#
+#         except:
+#             return self.list(request,*args,**kwargs)
+
 
 class NewsRecommendation(APIView):
     """
@@ -187,14 +199,17 @@ class NewsComments(APIView):
         :param request:
         :return:
         """
+        try:
+            news_id = request.GET.get('news_id')
+            offset = request.GET.get('offset',0)
+            limit = 10
+            root_comment = news_comment.objects.filter(news_id=news_id,root_id=-1).order_by('-comment_time')[offset:offset+limit]     #取出根评论
+            serializer = NewsCommentSerializer(root_comment, many=True)
+            return Response(serializer.data)
 
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
-        pass
+        except:
+            pass
+        return Response({'msg':'error','code':300})
 
     def post(self,request):
         """
@@ -206,8 +221,17 @@ class NewsComments(APIView):
             user = User.objects.get(username=request.user.username)
             user_id = user.id
             try:
-                content = request.POST['content']
-                news_id = request.POST['news_id']
+                content = request.POST.get('content','')
+                news_id = request.POST.get('news_id')
+                if not news_id:
+                    return Response({'msg': '参数错误', 'code': 300})
+                root_id = request.POST.get('root_id',-1)
+                parent_user_id = request.POST.get('parent_user_id')
+                # if parent_user_id:
+                news_comment.objects.create(content=content,news_id=news_id,root_id=root_id,parent_user_id=parent_user_id,user_id=user_id)
+                # else:
+                #     news_comment.objects.create(content=content, news_id=news_id, root_id=root_id, user_id=user_id)
+                return Response({'msg':'success','code':200})
 
             except:
                 return Response({'msg': '参数错误', 'code': 300})
@@ -216,3 +240,28 @@ class NewsComments(APIView):
         else:
             res = {'msg': '用户未登陆', 'code': 300}
             return Response(res)
+
+
+class NewsHot(APIView):
+
+    def get(self,request):
+
+        try:
+            classification = request.GET.get('classification','')
+
+            offset = request.GET.get('offset',0)
+            limit = 10
+            if classification:
+                news_id_list = list(news_hot.objects.filter(classification=classification).order_by('score')[offset:offset+limit].values_list('news_id',flat=True))
+            else:
+                news_id_list = list(news_hot.objects.all()[offset:offset+limit].values_list('news_id',flat=True))
+            news_list = news.objects.filter(news_id__in=news_id_list)
+            serializer = NewsAbstractSerializer(news_list, many=True)
+            return Response(serializer.data)
+        except:
+            pass
+
+        return Response({'msg':'error','code':300})
+
+
+
