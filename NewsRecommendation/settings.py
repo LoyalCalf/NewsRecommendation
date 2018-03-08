@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'user',
     'rest_framework',
     'rest_framework_swagger',
+
 ]
 
+"""django-redis"""
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -54,6 +56,13 @@ CACHES = {
         }
     }
 }
+REDIS_TIMEOUT=7*24*60*60
+CUBES_REDIS_TIMEOUT=60*60
+NEVER_REDIS_TIMEOUT=365*24*60*60
+
+
+
+
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -161,3 +170,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+"""邮箱设置"""
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '1345285903@qq.com'
+EMAIL_HOST_PASSWORD = 'yhzkmywbminmihhe'
+EMAIL_SUBJECT_PREFIX = 'django'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

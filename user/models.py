@@ -82,3 +82,10 @@ class user_recommendation(models.Model):
 
     class Meta():
         ordering = ['-date_created']
+
+class user_collection(models.Model):
+    user = models.ForeignKey(User,related_name='collection')
+    news = models.ForeignKey(news,null=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    pass

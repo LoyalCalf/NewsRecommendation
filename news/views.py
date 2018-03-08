@@ -5,8 +5,6 @@
 # @Software: PyCharm
 
 from django.contrib.auth.models import User
-from rest_framework import permissions, viewsets, renderers
-
 from rest_framework.response import Response
 from .serializers import NewsAbstractSerializer,NewsContentSerializer,NewsCommentSerializer
 from .models import news,news_profile,news_hot,news_comment
@@ -52,6 +50,8 @@ class NewsRecommendation(APIView):
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user.username)
             newsID = UserCF.UserCF_Recommendation().get_data(user.id)
+            if not newsID:
+                return Response({'msg':'暂时没有该用户的推荐结果','code':300})
             newsList = news.objects.filter(news_id__in=newsID)
             serializer = NewsAbstractSerializer(newsList, many=True)
             return Response(serializer.data)

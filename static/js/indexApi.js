@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
 
        //  var  information ={
@@ -9,7 +11,13 @@ $(document).ready(function () {
        //     tag:$("#tag").val(information.tag),
        //     classification:$("#classification").val(information.classification)
        // };
-        alert("执行ajax函数之前");
+    function setDiv(item){
+    var div = '<li style="padding-top: 0"><div class="item-inner-one item-inner-same g-c"><div><div class="item-inner-img sc-tr">'
+        + '<a href=' + item.news_link + '>' + item.title + '</a>'
+        + '</div></div></div></li>';
+    return div
+}
+
        $.ajax({
            type:'GET',
            dataType:"json",
@@ -17,9 +25,11 @@ $(document).ready(function () {
            success :function (data) {
                 var listUl=$("#news_id");
                 for(var i=1;i<=data.results.length;i++){
-                    var a=$("<a>"+data.results[i-1].title+"</a>>");
-                    a.attr("href","api/news/"+data.results[i-1].news_id);
-                    listUl.append(a);
+                    var div = setDiv(data.results[i-1]);
+                    // var a=$("<a>"+data.results[i-1].title+"</a>>");
+                    // a.attr("href","api/news/"+data.results[i-1].news_id);
+                    listUl.append(div);
+
                 }
            },
            error:function (e) {
@@ -28,3 +38,4 @@ $(document).ready(function () {
        })
 
   });
+

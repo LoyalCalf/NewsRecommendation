@@ -15,7 +15,7 @@ from news.models import news_tag_score, news
 from user.models import user_recommendation
 from datetime import datetime,timedelta
 
-def get_days_before_today(days=100):
+def get_days_before_today(days=1):
     return datetime.now() - timedelta(days=days)
 
 def get_data(user_id,news_id,classification=None):

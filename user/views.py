@@ -3,18 +3,19 @@
 # @Author  : 陈强
 # @FileName: views.py
 # @Software: PyCharm
-
-from django.shortcuts import render
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
-from user.utils import create_thumbnail
-
+from user.utils import create_thumbnail,Token
+from django.views.generic.base import TemplateView
 from rest_framework.response import Response
-from user.models import user_behavior,user_profile
+from user.models import user_behavior,user_profile,user_tag_score
 from django.shortcuts import render
 from rest_framework.views import APIView
-
 
 class Login(APIView):
     """
@@ -40,17 +41,37 @@ class Register(APIView):
     """
     def post(self,request):
         try:
-            username = request.POST['username']
-            password = request.POST['password']
-            email = request.POST['email']
-            user = auth.authenticate(username=username, password=password)
-            if user:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            email = request.POST.get('email')
+            user = User.objects.filter(username=username)
+
+            #暂时允许邮箱重复，便于测试
+
+            if user.exists():
                 return Response({'msg':'用户已存在','code':300})
-            User.objects.create_user(username=username,password=password,email=email)
+            user = User(username=username,password=make_password(password),email=email,is_active=False)
+            # User.objects.create_user(username=username,password=password,email=email,is_active=False)
+            self._send_register_email(user)
+            user.save()
+            user_profile.objects.create(user_id=user.id,nickname=username) #注册完成同时添加额外信息，保证信息完整
+            user_tag_score.objects.create(user_id=user.id)
             # user.save()
-            return Response({'msg':'注册成功','code':200})
+            return Response({'msg':'注册成功,请尽快完成邮箱验证','code':200})
         except:
-            return Response({'msg':'参数错误','code':300})
+            return Response({'msg':'错误','code':300})
+
+    def _send_register_email(self,user):
+        token_confirm = Token(settings.SECRET_KEY)
+        token = token_confirm.generate_validate_token(user.username)
+        # active_key = base64.encodestring(username)
+        # send email to the register email
+        message = "\n".join([
+            u'{0},欢迎加入'.format(user.username),
+            u'请访问该链接，完成用户验证:',
+            '/'.join(['http://127.0.0.1:8000', 'account/activate', token])
+        ])
+        send_mail('注册用户验证信息', message, '1345285903@qq.com', [str(user.email)])
 
 
 
@@ -66,8 +87,8 @@ class UserBehavior(APIView):
             user = User.objects.get(username=request.user.username)
             # print(request.POST)
             try:
-                behavior_type = request.GET['behavior_type']
-                news_id = request.GET['news_id']
+                behavior_type = request.GET.get('behavior_type')
+                news_id = request.GET.get('news_id')
             except:
                 return Response({'msg':'参数错误','code':300})
 
@@ -108,3 +129,25 @@ class UserProfileSetting(APIView):
             res = {'msg':'用户未登陆','code':300}
             return Response(res)
 
+"""用户收藏资讯"""
+class UserCollection(APIView):
+    pass
+
+#用户邮箱验证
+class active_user(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+
+    # def active_user(request, token):
+        token_confirm = Token(settings.SECRET_KEY)
+        try:
+            username = token_confirm.confirm_validate_token(kwargs['token'])
+        except:
+            return HttpResponse('对不起，验证链接已经过期')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return HttpResponse('对不起，您所验证的用户不存在，请重新注册')
+        user.is_active = True
+        user.save()
+        return render(request,'index.html')
