@@ -51,8 +51,8 @@ class NewsRecommendation(APIView):
     """
     请求：GET
     功能：资讯推荐
-    参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐）
-
+    参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐），offset
+    说明：offset主要是为了给未登陆用户推荐热点新闻，如果用户登录则推荐新闻，该参数没有影响，因此统一传递此参数
     """
     def get(self,request):
         if request.user.is_authenticated():
@@ -79,8 +79,18 @@ class NewsRecommendation(APIView):
             # return Response(serializer.data)
 
         else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
+            classification = request.GET.get('classification', '')
+            offset = int(request.GET.get('offset', 0))
+            limit = 10
+            if classification:
+                news_id_list = list(news_hot.objects.filter(classification=classification).order_by('score')[offset:offset + limit].values_list('news_id', flat=True))
+            else:
+                news_id_list = list(news_hot.objects.all()[offset:offset + limit].values_list('news_id', flat=True))
+            news_list = news.objects.filter(news_id__in=news_id_list)
+            serializer = NewsAbstractSerializer(news_list, many=True)
+            return Response(serializer.data)
+            # res = {'msg':'用户未登陆','code':300}
+            # return Response(res)
 
 
 # class NewsRecommendationSociety(APIView):
@@ -214,13 +224,14 @@ class NewsRecommendation(APIView):
 
 class NewsComments(APIView):
     """
-    资讯评论
+    请求：GET或POST
+    功能：资讯评论
     """
 
     def get(self,request):
         """
         获取评论
-        :param request:
+        :param request:news_id,offset
         :return:
         """
         try:
@@ -238,7 +249,7 @@ class NewsComments(APIView):
     def post(self,request):
         """
         用户评论
-        :param request:
+        :param request:content(用户评论内容)，news_id（被评论的资讯）
         :return:
         """
         if request.user.is_authenticated():
@@ -256,7 +267,6 @@ class NewsComments(APIView):
                 # else:
                 #     news_comment.objects.create(content=content, news_id=news_id, root_id=root_id, user_id=user_id)
                 return Response({'msg':'success','code':200})
-
             except:
                 return Response({'msg': '参数错误', 'code': 300})
 
@@ -271,7 +281,7 @@ class NewsHot(APIView):
     def get(self,request):
         try:
             classification = request.GET.get('classification','')
-            offset = request.GET.get('offset',0)
+            offset = int(request.GET.get('offset',0))
             limit = 10
             if classification:
                 news_id_list = list(news_hot.objects.filter(classification=classification).order_by('score')[offset:offset+limit].values_list('news_id',flat=True))

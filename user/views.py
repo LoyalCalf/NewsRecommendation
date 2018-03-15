@@ -81,7 +81,9 @@ class Register(APIView):
 
 class UserBehavior(APIView):
     """
-    用户的行为API，比如浏览一条新闻，点赞，不喜欢等行为
+    请求：GET
+    功能：用户的行为API，比如浏览一条新闻，点赞，不喜欢等行为
+    参数：behavior_type（具体参数参看数据库建模文档），news_id（对某条资讯产生的行为）
     """
 
     # @method_decorator(csrf_exempt)
@@ -90,12 +92,8 @@ class UserBehavior(APIView):
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user.username)
             # print(request.POST)
-            try:
-                behavior_type = request.GET.get('behavior_type')
-                news_id = request.GET.get('news_id')
-            except:
-                return Response({'msg':'参数错误','code':300})
-
+            behavior_type = request.GET.get('behavior_type')
+            news_id = request.GET.get('news_id')
             dic = {'behavior_type':behavior_type,'news_id':news_id,'user_id':user.id}
             user_behavior.objects.create(**dic)
             res = {'msg':'success','code':200}
@@ -105,6 +103,11 @@ class UserBehavior(APIView):
             return Response(res)
 
 class UserProfileSetting(APIView):
+    """
+    请求：POST
+    功能：用户资料设置
+    参数：参看数据库说明文档
+    """
 
     def post(self,request):
         if request.user.is_authenticated():
