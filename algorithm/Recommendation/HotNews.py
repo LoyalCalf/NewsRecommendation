@@ -55,6 +55,7 @@ class HotNews(object):
 
 
 if __name__=='__main__':
+
     HotNews().calculate_hot_news()
 
 

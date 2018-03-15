@@ -63,7 +63,7 @@ NEVER_REDIS_TIMEOUT=365*24*60*60
 
 
 
-
+"""搜索配置"""
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'news.whoosh_cn_backend.WhooshEngine',
@@ -73,6 +73,7 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
+"""restful-frame配置"""
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -176,7 +177,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = '1345285903@qq.com'
-EMAIL_HOST_PASSWORD = 'yhzkmywbminmihhe'
+EMAIL_HOST_PASSWORD = '----------'    #邮箱密码，已注释
 EMAIL_SUBJECT_PREFIX = 'django'
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

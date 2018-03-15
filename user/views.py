@@ -16,6 +16,7 @@ from rest_framework.response import Response
 from user.models import user_behavior,user_profile,user_tag_score
 from django.shortcuts import render
 from rest_framework.views import APIView
+from algorithm.Recommendation.genUserTag import UserTag
 
 class Login(APIView):
     """
@@ -83,7 +84,7 @@ class UserBehavior(APIView):
     """
     请求：GET
     功能：用户的行为API，比如浏览一条新闻，点赞，不喜欢等行为
-    参数：behavior_type（具体参数参看数据库建模文档），news_id（对某条资讯产生的行为）
+    参数：behavior_type（具体参数参看数据库建模文档），news_id（对某条资讯产生的行为）,behavoir_way(产生行为的方式，搜索阅读和推荐阅读)
     """
 
     # @method_decorator(csrf_exempt)
@@ -92,10 +93,12 @@ class UserBehavior(APIView):
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user.username)
             # print(request.POST)
-            behavior_type = request.GET.get('behavior_type')
+            behavior_type = request.GET.get('behavior_type',1)
+            behavior_way = request.GET.get('behavior_way',1)
             news_id = request.GET.get('news_id')
-            dic = {'behavior_type':behavior_type,'news_id':news_id,'user_id':user.id}
+            dic = {'behavior_type':behavior_type,'news_id':news_id,'user_id':user.id,'behavior_way':behavior_way}
             user_behavior.objects.create(**dic)
+            UserTag(news_id,user.id,behavior_type,behavior_way).calculate()      #更新用户兴趣表
             res = {'msg':'success','code':200}
             return Response(res)
         else:

@@ -52,6 +52,7 @@ class NewsRecommendation(APIView):
     请求：GET
     功能：资讯推荐
     参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐），offset
+    URL格式：api/news_recommendation/?classification=社会&offset=10
     说明：offset主要是为了给未登陆用户推荐热点新闻，如果用户登录则推荐新闻，该参数没有影响，因此统一传递此参数
     """
     def get(self,request):

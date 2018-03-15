@@ -3,12 +3,15 @@
 
 # NewsRecommendation\urls.py: 16,17
 # NewsRecommendation\wsgi.py: 12
-# algorithm\NaiveBayes\NaiveBayesPredict.py: 11
+# algorithm\NaiveBayes\NaiveBayesPredict.py: 10
 # algorithm\Recommendation\ContentBased.py: 11
+# algorithm\Recommendation\HotNews.py: 10
 # algorithm\Recommendation\UserCF.py: 12
+# algorithm\Recommendation\genUserTag.py: 9,14
 # manage.py: 14
 # news\admin.py: 1
 # news\apps.py: 1
+# news\cache_manager.py: 11,12
 # news\migrations\0001_initial.py: 5
 # news\migrations\0002_auto_20180131_1310.py: 5
 # news\migrations\0003_auto_20180131_1513.py: 5
@@ -16,25 +19,40 @@
 # news\migrations\0005_auto_20180202_1313.py: 5
 # news\migrations\0006_news_is_predict.py: 5
 # news\migrations\0007_auto_20180207_1625.py: 5
+# news\migrations\0008_auto_20180304_2243.py: 5,6
+# news\migrations\0009_auto_20180304_2244.py: 5,6
+# news\migrations\0010_auto_20180305_1838.py: 5,6
+# news\migrations\0011_auto_20180305_2021.py: 6,7
+# news\migrations\0012_auto_20180306_1138.py: 6,7
 # news\models.py: 4,5
 # news\serializers.py: 9
 # news\tests.py: 1
 # news\urls.py: 14
-# news\views.py: 7,14
+# news\views.py: 7,12
+# news\whoosh_cn_backend.py: 12,13,14,15,16
 # user\admin.py: 1,3
 # user\apps.py: 1
 # user\migrations\0001_initial.py: 6,7
 # user\migrations\0002_user_search.py: 6,7
 # user\migrations\0003_auto_20180207_1625.py: 6,7
 # user\migrations\0004_auto_20180208_2320.py: 5
+# user\migrations\0005_auto_20180304_2243.py: 5
+# user\migrations\0006_auto_20180306_1612.py: 5
+# user\migrations\0007_auto_20180306_1631.py: 5
 # user\models.py: 7,8
 # user\serializers.py: 7
 # user\tests.py: 1
-# user\views.py: 1
+# user\urls.py: 7
+# user\utils.py: 11
+# user\views.py: 6,7,8,9,10,11,12,14,17
 Django == 1.11.5
 
-#pymysql
-pymysql
+# user\utils.py: 7
+Pillow == 4.2.1
+
+# NewsRecommendation\__init__.py: 1
+# spiders\ChinaNews\ChinaNews\pipelines.py: 9,10
+#PyMySQL == 0.7.11
 
 # spiders\ChinaNews\ChinaNews\items.py: 8
 # spiders\ChinaNews\ChinaNews\middlewares.py: 8
@@ -47,17 +65,33 @@ Scrapy == 1.4.0
 # spiders\ChinaNews\ChinaNews\pipelines.py: 8
 Twisted == 17.5.0
 
+# news\whoosh_cn_backend.py: 30,45,46,47,48
+Whoosh == 2.7.4
+
 # spiders\ChinaNews\ChinaNews\spiders\ChinaNews_spider.py: 9
 beautifulsoup4 == 4.6.0
 
+# news\search_indexes.py: 8
+# news\whoosh_cn_backend.py: 24,25,103,591,788
+django_haystack == 2.6.1
+
+# NewsRecommendation\urls.py: 20
+django_rest_swagger == 2.1.2
+
+# NewsRecommendation\urls.py: 19
 # news\serializers.py: 10
 # news\urls.py: 7
-# news\views.py: 8,10,15,16
+# news\views.py: 8,13,14
 # user\serializers.py: 8
+# user\views.py: 15,18
 djangorestframework == 3.7.3
 
+# user\utils.py: 9
+itsdangerous == 0.24
+
 # algorithm\NaiveBayes\NB.py: 10
-# algorithm\NaiveBayes\NaiveBayesPredict.py: 10
+# algorithm\NaiveBayes\NaiveBayesPredict.py: 9
+# news\whoosh_cn_backend.py: 51
 # spiders\ChinaNews\ChinaNews\spiders\ChinaNews_spider.py: 10
 jieba == 0.38
 
@@ -65,5 +99,5 @@ jieba == 0.38
 numpy == 1.13.1
 
 # algorithm\NaiveBayes\NB.py: 7,11
-# algorithm\NaiveBayes\NaiveBayesPredict.py: 8
+# algorithm\NaiveBayes\NaiveBayesPredict.py: 7
 scikit_learn == 0.19.1
