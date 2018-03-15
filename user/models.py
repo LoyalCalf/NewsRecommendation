@@ -88,4 +88,5 @@ class user_collection(models.Model):
     news = models.ForeignKey(news,null=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
-    pass
+
+

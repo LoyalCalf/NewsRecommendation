@@ -139,6 +139,6 @@ class UserCF_Recommendation(object):
 
 
 if __name__=='__main__':
-    # CalculateSimilarityUser().similarity_user()
-    UserCF_Recommendation().get_data(2)
+    CalculateSimilarityUser().similarity_user()
+    # UserCF_Recommendation().get_data(2)
     # print(3.32780127197021e-59**2)

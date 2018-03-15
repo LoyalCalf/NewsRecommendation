@@ -21,7 +21,7 @@ NEWSPIDER_MODULE = 'ChinaNews.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-LOG_FILE="log.txt"
+#LOG_FILE="log.txt"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

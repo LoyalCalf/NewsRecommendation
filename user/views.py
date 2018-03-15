@@ -19,7 +19,9 @@ from rest_framework.views import APIView
 
 class Login(APIView):
     """
-    登陆api，post请求，需要username和password参数（暂时的要求）
+    请求：POST
+    功能：用户登录API
+    参数：username，password（暂时两个参数）
     """
 
     def post(self,request):
@@ -37,7 +39,9 @@ class Login(APIView):
 
 class Register(APIView):
     """
-    注册API
+    请求：POST
+    功能：用户注册API
+    参数：username，password，email
     """
     def post(self,request):
         try:

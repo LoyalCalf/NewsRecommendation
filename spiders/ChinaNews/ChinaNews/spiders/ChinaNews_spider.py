@@ -90,6 +90,7 @@ class ChinaNewsSpider(scrapy.Spider):
         image = ''
         for i in images:
             image += i + ','
+
         tags = jieba.analyse.extract_tags(jieba_content, topK=5, withWeight=False, allowPOS=())
         tag = ''
         for i in tags:

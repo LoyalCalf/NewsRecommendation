@@ -54,9 +54,6 @@ class HotNews(object):
             news_hot.objects.update_or_create(**dic)
 
 
-
-
-
 if __name__=='__main__':
     HotNews().calculate_hot_news()
 

@@ -21,7 +21,12 @@ def index(request):
 
 class NewsList(generics.ListCreateAPIView):
     """
-    所有新闻的API
+    请求：GET
+    功能：所有新闻的API
+    参数：offset和limit
+    URL格式：api/news/(news_id)
+    例子：api/news/?limit=10&offset=10
+    说明：带上news_id则请求具体的新闻内容
     """
     queryset = news.objects.all()
     serializer_class = NewsAbstractSerializer
@@ -44,148 +49,167 @@ class NewsContent(generics.RetrieveUpdateDestroyAPIView):
 
 class NewsRecommendation(APIView):
     """
-    所有类型推荐新闻api
+    请求：GET
+    功能：资讯推荐
+    参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐）
+
     """
     def get(self,request):
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user.username)
-            newsID = UserCF.UserCF_Recommendation().get_data(user.id)
-            if not newsID:
-                return Response({'msg':'暂时没有该用户的推荐结果','code':300})
-            newsList = news.objects.filter(news_id__in=newsID)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
+            classification = request.GET.get('classification',None)
 
-
-class NewsRecommendationSociety(APIView):
-    """
-    社会类型资讯推荐
-    """
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
-
+            news_read = user_behavior.objects.filter(user_id=user.id, behavior_type__in=[1, 2]).order_by('-behavior_time')[:1]
             if news_read.exists():
                 news_id = news_read[0].news_id
             else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'社会')
+                hot = news_hot.objects.order_by('-pubtime')[:1]            #用户没有浏览过资讯就已最新的热点新闻作为基础
+                news_id = hot[0].news_id
+
+            recom_news_id = ContentBased.ContentBasedRecommendation(user.id, news_id, classification)
             newsList = news.objects.filter(news_id__in=recom_news_id)
             serializer = NewsAbstractSerializer(newsList, many=True)
             return Response(serializer.data)
+
+            # newsID = UserCF.UserCF_Recommendation().get_data(user.id)
+            # if not newsID:
+            #     return Response({'msg':'暂时没有该用户的推荐结果','code':300})
+            # newsList = news.objects.filter(news_id__in=newsID)
+            # serializer = NewsAbstractSerializer(newsList, many=True)
+            # return Response(serializer.data)
+
         else:
             res = {'msg':'用户未登陆','code':300}
             return Response(res)
 
-class NewsRecommendationGame(APIView):
-    """
-    游戏类型资讯推荐
-    """
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
 
-            if news_read.exists():
-                news_id = news_read[0].news_id
-            else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'游戏')
-            newsList = news.objects.filter(news_id__in=recom_news_id)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
-
-class NewsRecommendationEntertainment(APIView):
-    """
-    娱乐类型资讯推荐
-    """
-
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
-
-            if news_read.exists():
-                news_id = news_read[0].news_id
-            else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'娱乐')
-            newsList = news.objects.filter(news_id__in=recom_news_id)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
-
-class NewsRecommendationSports(APIView):
-    """
-    体育类型资讯推荐
-    """
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
-
-            if news_read.exists():
-                news_id = news_read[0].news_id
-            else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'体育')
-            newsList = news.objects.filter(news_id__in=recom_news_id)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
-
-class NewsRecommendationFinance(APIView):
-    """
-    财经类型资讯推荐
-    """
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
-
-            if news_read.exists():
-                news_id = news_read[0].news_id
-            else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'财经')
-            newsList = news.objects.filter(news_id__in=recom_news_id)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
-
-class NewsRecommendationFashion(APIView):
-    """
-    时尚类型资讯推荐
-    """
-    def get(self,request):
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user.username)
-            news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
-
-            if news_read.exists():
-                news_id = news_read[0].news_id
-            else:
-                news_id = 1
-            recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'时尚')
-            newsList = news.objects.filter(news_id__in=recom_news_id)
-            serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
-        else:
-            res = {'msg':'用户未登陆','code':300}
-            return Response(res)
+# class NewsRecommendationSociety(APIView):
+#     """
+#     社会类型资讯推荐
+#     """
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 hot = news_hot.objects.order_by('-pubtime')[:1]            #用户没有浏览过资讯就已最新的热点新闻作为基础
+#                 news_id = hot[0].news_id
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'社会')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
+#
+# class NewsRecommendationGame(APIView):
+#     """
+#     游戏类型资讯推荐
+#     """
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 news_id = 1
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'游戏')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
+#
+# class NewsRecommendationEntertainment(APIView):
+#     """
+#     娱乐类型资讯推荐
+#     """
+#
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 news_id = 1
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'娱乐')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
+#
+# class NewsRecommendationSports(APIView):
+#     """
+#     体育类型资讯推荐
+#     """
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 news_id = 1
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'体育')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
+#
+# class NewsRecommendationFinance(APIView):
+#     """
+#     财经类型资讯推荐
+#     """
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 news_id = 1
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'财经')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
+#
+# class NewsRecommendationFashion(APIView):
+#     """
+#     时尚类型资讯推荐
+#     """
+#     def get(self,request):
+#         if request.user.is_authenticated():
+#             user = User.objects.get(username=request.user.username)
+#             news_read = user_behavior.objects.filter(user_id=user.id,behavior_type__in=[1,2]).order_by('-behavior_time')[:1]
+#
+#             if news_read.exists():
+#                 news_id = news_read[0].news_id
+#             else:
+#                 news_id = 1
+#             recom_news_id = ContentBased.ContentBasedRecommendation(user.id,news_id,'时尚')
+#             newsList = news.objects.filter(news_id__in=recom_news_id)
+#             serializer = NewsAbstractSerializer(newsList, many=True)
+#             return Response(serializer.data)
+#         else:
+#             res = {'msg':'用户未登陆','code':300}
+#             return Response(res)
 
 
 class NewsComments(APIView):
@@ -245,10 +269,8 @@ class NewsComments(APIView):
 class NewsHot(APIView):
 
     def get(self,request):
-
         try:
             classification = request.GET.get('classification','')
-
             offset = request.GET.get('offset',0)
             limit = 10
             if classification:
@@ -259,9 +281,10 @@ class NewsHot(APIView):
             serializer = NewsAbstractSerializer(news_list, many=True)
             return Response(serializer.data)
         except:
-            pass
 
-        return Response({'msg':'error','code':300})
+            return Response({'msg':'error','code':300})
+
+
 
 
 

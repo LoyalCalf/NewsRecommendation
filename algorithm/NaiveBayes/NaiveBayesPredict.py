@@ -4,7 +4,6 @@
 # @FileName: NaiveBayesPredict.py
 # @Software: PyCharm
 
-import pymysql
 from sklearn.externals import joblib
 import pickle
 import jieba
@@ -16,14 +15,6 @@ from news.models import news,news_tag_score
 
 def get_data_dict():
 
-    # conn =pymysql.connect(host='127.0.0.1',user='root',password='1345285903',db='newsrecommendation',charset="utf8")
-    # cur = conn.cursor()
-    # #取出没有预测过的新闻
-    # sql = 'select news_id,content from news_news where is_predict=0'
-    # cur.execute(sql)
-    # datas = cur.fetchall()
-    # cur.close()
-    # conn.close()
 
     datas = news.objects.filter(is_predict=0).values_list()
 

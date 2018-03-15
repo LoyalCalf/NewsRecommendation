@@ -20,12 +20,12 @@ urlpatterns = [
     url(r'^news/(?P<pk>[0-9]+)/$', views.NewsContent.as_view()),
 
     url(r'^news_recommendation/', views.NewsRecommendation.as_view()),
-    url(r'^news_society/', views.NewsRecommendationSociety.as_view()),
-    url(r'^news_game/', views.NewsRecommendationGame.as_view()),
-    url(r'^news_entertainment/', views.NewsRecommendationEntertainment.as_view()),
-    url(r'^news_sports/', views.NewsRecommendationSports.as_view()),
-    url(r'^news_finance/', views.NewsRecommendationFinance.as_view()),
-    url(r'^news_fashion/', views.NewsRecommendationFashion.as_view()),
+    # url(r'^news_society/', views.NewsRecommendationSociety.as_view()),
+    # url(r'^news_game/', views.NewsRecommendationGame.as_view()),
+    # url(r'^news_entertainment/', views.NewsRecommendationEntertainment.as_view()),
+    # url(r'^news_sports/', views.NewsRecommendationSports.as_view()),
+    # url(r'^news_finance/', views.NewsRecommendationFinance.as_view()),
+    # url(r'^news_fashion/', views.NewsRecommendationFashion.as_view()),
     url(r'^news_hot/', views.NewsHot.as_view()),
     url(r'^news_comment/', views.NewsComments.as_view()),
 

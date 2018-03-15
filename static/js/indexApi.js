@@ -21,11 +21,11 @@ $(document).ready(function () {
        $.ajax({
            type:'GET',
            dataType:"json",
-           url:"api/news/?format=json",
+           url:"api/news_hot/?format=json",
            success :function (data) {
                 var listUl=$("#news_id");
-                for(var i=1;i<=data.results.length;i++){
-                    var div = setDiv(data.results[i-1]);
+                for(var i=1;i<=data.length;i++){
+                    var div = setDiv(data[i-1]);
                     // var a=$("<a>"+data.results[i-1].title+"</a>>");
                     // a.attr("href","api/news/"+data.results[i-1].news_id);
                     listUl.append(div);
