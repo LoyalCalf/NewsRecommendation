@@ -47,7 +47,7 @@ function signIn(){
     var password = $("#password").val();
     if(username.length !== 0 && password.length !== 0){
         $.ajax({
-            url:'/login',
+            url:'api/login/?format=json',
             type:'POST',
             async:true,    //或false,是否异步
             data:{

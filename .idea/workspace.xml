@@ -2,41 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1c536b3-4e04-4ece-b11d-5ae0274aeb6b" name="Default" comment="更新API和部分说明">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/admin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/apps.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/migrations/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/views.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/user/serializers.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/news/serializers.py" afterPath="$PROJECT_DIR$/api/serializers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewsRecommendation/settings.py" afterPath="$PROJECT_DIR$/NewsRecommendation/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewsRecommendation/urls.py" afterPath="$PROJECT_DIR$/NewsRecommendation/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/NB.py" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/NB.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/NaiveBayes/NaiveBayesPredict.py" afterPath="$PROJECT_DIR$/algorithm/NaiveBayes/NaiveBayesPredict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/Recommendation/ContentBased.py" afterPath="$PROJECT_DIR$/algorithm/Recommendation/ContentBased.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/Recommendation/HotNews.py" afterPath="$PROJECT_DIR$/algorithm/Recommendation/HotNews.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/Recommendation/LatentFactor.py" afterPath="$PROJECT_DIR$/algorithm/Recommendation/LatentFactor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/Recommendation/UserCF.py" afterPath="$PROJECT_DIR$/algorithm/Recommendation/UserCF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/Recommendation/genUserTag.py" afterPath="$PROJECT_DIR$/algorithm/Recommendation/genUserTag.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/cache_manager.py" afterPath="$PROJECT_DIR$/news/cache_manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/models.py" afterPath="$PROJECT_DIR$/news/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/urls.py" afterPath="$PROJECT_DIR$/news/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news/views.py" afterPath="$PROJECT_DIR$/news/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/common.css" afterPath="$PROJECT_DIR$/static/css/common.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/index.js" afterPath="$PROJECT_DIR$/static/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/indexApi.js" afterPath="$PROJECT_DIR$/static/js/indexApi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/search/indexes/news/news_text.txt" afterPath="$PROJECT_DIR$/templates/search/indexes/news/news_text.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/search/search.html" afterPath="$PROJECT_DIR$/templates/search/search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/admin.py" afterPath="$PROJECT_DIR$/user/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/models.py" afterPath="$PROJECT_DIR$/user/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/urls.py" afterPath="$PROJECT_DIR$/user/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/utils.py" afterPath="$PROJECT_DIR$/user/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user/views.py" afterPath="$PROJECT_DIR$/user/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/sign.js" afterPath="$PROJECT_DIR$/static/js/sign.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -88,27 +56,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/indexApi.js">
+      <file leaf-file-name="register.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/register.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-              <folding>
-                <marker date="1521358683499" expanded="true" signature="228:242" ph="..." />
-                <marker date="1521358683499" expanded="true" signature="735:770" ph="..." />
-              </folding>
+            <state relative-caret-position="33">
+              <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/views.py">
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7689">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding>
-                <element signature="e#112#208#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-495">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sign.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/sign.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/api/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="640">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="e#112#153#0" expanded="true" />
               </folding>
@@ -159,30 +142,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding>
-                <element signature="e#114#150#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -290,8 +251,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/spiders/ChinaNews/ChinaNews/items.py" />
-        <option value="$PROJECT_DIR$/spiders/ChinaNews/start.py" />
         <option value="$PROJECT_DIR$/algorithm/NaiveBayes/dataPrepare.py" />
         <option value="$PROJECT_DIR$/algorithm/NaiveBayes/stop_words.txt" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/jieba/analyse/tfidf.py" />
@@ -341,6 +300,8 @@
         <option value="$PROJECT_DIR$/static/js/indexApi.js" />
         <option value="$PROJECT_DIR$/news/views.py" />
         <option value="$PROJECT_DIR$/api/serializers.py" />
+        <option value="$PROJECT_DIR$/static/js/sign.js" />
+        <option value="$PROJECT_DIR$/templates/login.html" />
       </list>
     </option>
   </component>
@@ -427,6 +388,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewsRecommendation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewsRecommendation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1186,31 +1165,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/lib/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/sign.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1351,14 +1306,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1378,18 +1325,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/news/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7689">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#112#208#0" expanded="true" />
           </folding>
@@ -1399,7 +1338,7 @@
     <entry file="file://$PROJECT_DIR$/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="463">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#114#150#0" expanded="true" />
           </folding>
@@ -1427,7 +1366,7 @@
     <entry file="file://$PROJECT_DIR$/api/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#112#153#0" expanded="true" />
           </folding>
@@ -1456,6 +1395,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/news/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-495">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/sign.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
           <folding />
         </state>
       </provider>
