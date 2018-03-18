@@ -121,7 +121,6 @@
 
 
 
-
     function init() {
         bannerPic();//轮播图
         inputAddClick(); //搜索框的焦点的判断

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import user_tag_score,user_behavior,user_profile,user_recommendation
+from .models import user_tag_score, user_behavior, user_profile, user_recommendation
 from django.contrib.auth.models import User
 
 # Register your models here.

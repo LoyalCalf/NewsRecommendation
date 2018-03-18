@@ -14,7 +14,13 @@ input, select, textarea{ font-family: "Helvetica Neue", Helvetica, Arial, "PingF
 .g-c{ zoom:1;}
 .g-c:after{ clear:both; content:"."; display:block; height:0; visibility:hidden;}
 .g-hide{ display:none !important;}
-.g-minwidth{width:100%;min-width: 1220px;margin:0 auto;}
+.g-minwidth{
+    width:100%;
+    min-width: 1220px;
+    margin:0 auto;
+    height:55px;
+    background-color: #985f0d;
+}
 .g-active{background-color: #ed4040}
 .g-hidden{display: none}
 

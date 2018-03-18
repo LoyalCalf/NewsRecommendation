@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'haystack',
     'news',
     'user',
+    'api',
     'rest_framework',
     'rest_framework_swagger',
 
@@ -121,7 +122,7 @@ WSGI_APPLICATION = 'NewsRecommendation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'newsrecommendation',
         'USER': 'root',
         'PASSWORD': '1345285903',

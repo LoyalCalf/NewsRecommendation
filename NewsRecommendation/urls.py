@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from news.views import index
+import api
 from rest_framework.schemas import get_schema_view
 from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
-from user.views import active_user
+
 
 schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
@@ -26,14 +26,14 @@ schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRender
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-
-    url(r'^$',index),
-
     url(r'^docs/', schema_view, name="docs"),
-    url(r'^api/', include('news.urls')),
-    url(r'^api/', include('user.urls')),
-    url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
+    url(r'^api/', include('api.urls')),
 
-    url(r'^account/activate/(?P<token>[\w\-]+.[\w\-]+.[\w\-]+)/$',active_user.as_view(),name='active_user')
+    url(r'^', include('news.urls')),
+    url(r'^', include('user.urls')),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # url(r'^account/activate/(?P<token>[\w\-]+.[\w\-]+.[\w\-]+)/$', active_user.as_view(), name='active_user')
 
 ]

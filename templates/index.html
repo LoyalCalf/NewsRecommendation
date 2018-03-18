@@ -6,48 +6,52 @@
     <title>资讯推荐</title>
     <link rel="stylesheet" href= "static/css/common.css" />
     <link rel="stylesheet" href=" static/css/index.css" />
-    <script src="static/js/lib/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" >
+    <script src="static/js/lib/jquery.min.js"></script>
     <script src="static/js/indexApi.js"></script>
+
 </head>
 <body>
 <div class="g-container">
-    <header title="navigation" class="g-minwidth" id="header" name="header">
+    <header  class="navbar " style=" background-color: #985f0d;" id="i-header" >
         <ul class="g-c h-left">
             <li class="h-link-app">
-                <a class="a-header">头条</a>
+                <a class="a-header">您的新闻</a>
             </li>
 
         </ul>
+
         <ul class="h-right g-c">
+            <li>
+                <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </li>
             <li style="margin-right: 14px;" class="g-active">
                 <div class="h-login">
-                    <a>登录</a>
+                    <a href="login/login.html">登录</a>
                 </div>
             </li>
-            <li><a>问答</a></li>
-            <li><a>图虫</a></li>
-            <li><a>反馈</a></li>
+            <li><a href="register/register.html">注册</a></li>
 
         </ul>
     </header>
     <!--<script src="js/header.js"></script>-->
     <div class="g-content">
         <div class="g-context g-c">
-            <div class="index-lf-zhanwei"></div>
+{#            <div class="index-lf-zhanwei"></div>#}
             <div class="index-lf">
-                <ul>
-                    <li><a class="i-active" href="#">推荐</a></li>
-                    <li><a href="#">热点</a></li>
-                    <li><a href="#">视频</a></li>
-                    <li><a href="#">图片</a></li>
-                    <li><a href="#">段子</a></li>
-                    <li><a href="#">社会</a></li>
-                    <li><a href="#">娱乐</a></li>
-                    <li><a href="#">科技</a></li>
-                    <li><a href="#">体育</a></li>
-                    <li><a href="#">汽车</a></li>
-                    <li><a href="#">财经</a></li>
-                    <li><a>搞笑</a></li>
+                <ul class="catalog" id="">
+                    <li><a class="i-active" id="" href="#">推荐</a></li>
+                    <li><a id="" href="#">新闻</a></li>
+                    <li><a id="" href="#">社会</a></li>
+                    <li><a id="" href="#">时政</a></li>
+                    <li><a id="" href="#">娱乐</a></li>
+                    <li><a id="" href="#">体育</a></li>
+                    <li><a id="">搞笑</a></li>
                     <li>
                         <a class="index-lf-more">
                             更多
@@ -75,52 +79,38 @@
                 <!--列表新闻-->
                 <div class="list-news-container">
 
-
                     <ul class="news-list" id="news_id">
 {#                        <li style='padding-top: 0'>#}
 {#                            <div class="item-inner-one item-inner-same g-c">#}
 {#                                <div>#}
 {#                                    <div class="item-inner-img sc-tr">#}
-{#                                        <a href="" target="_blank" id="news_link">#}
-{#                                            <img alt="" src="#" title="">#}
+{#                                        <a href="#" target="_blank" class="news_img">#}
+{#                                            <img alt="资料图：重庆火车站。陈超 摄" src="" >#}
 {#                                        </a>#}
+{#                                        <div class="pictext" style="text-align: left;text-indent: 2em; "></div>#}
 {#                                    </div>#}
 {#                                    <div class="item-inner-title">#}
 {#                                        <span class="item-inner-center">#}
-{#                                          <p id="title" class="item-inner-title">123</p>#}
+{#                                            <p><a class="it-news-tl" href="#" id="title" >中新网</a>1月31日电 国新办今日举行新闻发布会，介绍2018年春运形势和工作安排。</p>#}
+{#                                            <p class="it-news-footer">#}
+{#                                                <a class="item-news-type item-news-same" id="classification" href="#">时政</a>#}
+{#                                                <a class="item-news-icon item-news-same" href="#"></a>#}
+{#                                                <a href="#" class="item-news-same item-news-name">长安街知事</a>#}
+{#                                                <a class="item-news-same" href="#">.25评论</a>#}
+{#                                                <span class="item-news-same">.52分钟前</span>#}
+{#                                            </p>#}
 {#                                        </span>#}
 {#                                    </div>#}
 {#                                </div>#}
 {#                            </div>#}
 {#                        </li>#}
-
                     </ul>
+
                 </div>
             </div>
 
 
-            <div class="index-rg">
-                <!--搜索框-->
-                <div class="s-form">
-                    <div class="s-form-center">
-                        <input type="text" placeholder="请输入关键字" class="s-input"/>
-                        <a class="s-search"><img src="images/ic_serach_pub.png"/></a>
-                    </div>
-                    <ul class="s-search-lianxiang">
-                        <li class="search-item">
-                            <a href="#">
-                                <i class="search-no search-no-1">1</i>
-                                <span class="search-txt">###</span>
-                            </a>
-                        </li>
-                    </ul>
 
-                </div>
-
-
-
-
-            </div>
             <div class="back-top">
                 <span class="top-sam">刷新</span>
                 <a class="top-sam" href="#header">向上</a>
@@ -130,5 +120,17 @@
 </div>
 {#<script src="{% static "js/indexScrollControll.js" %}"></script>#}
 <script src= "static/js/index.js"></script>
+
+<script type="text/javascript">
+          $(function () {
+              $('.catalog   a').click(function() {
+                $(".catalog  a").removeClass("i-active");
+                $(this).addClass("i-active");
+              });
+          })
+
+    </script>
+
+
 </body>
 </html>

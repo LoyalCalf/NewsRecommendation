@@ -4,7 +4,7 @@
 # @FileName: utils.py
 # @Software: PyCharm
 
-from PIL import Image,ImageOps
+from PIL import Image, ImageOps
 from io import BytesIO
 from itsdangerous import URLSafeTimedSerializer as utsr
 import base64
@@ -45,9 +45,6 @@ def create_thumbnail(src, new_name, ext):
     return large_file
 
 
-
-
-
 class Token():
     def __init__(self, security_key):
         self.security_key = security_key
@@ -62,4 +59,3 @@ class Token():
         return serializer.loads(token,
                                 salt=self.salt,
                                 max_age=expiration)
-

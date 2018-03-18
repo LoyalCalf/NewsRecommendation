@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资讯推荐</title>
+    <link rel="stylesheet" href= "static/css/common.css" />
+    <link rel="stylesheet" href=" static/css/index.css" />
+    <link rel="stylesheet" href="static/css/bootstrap.css" >
+    <script src="static/js/lib/jquery-3.2.1.js"></script>
+    <script src="static/js/news_api/news_.js"></script>
+</head>
+<body>
+<div class="g-container">
+    <header  class="g-minwidth" id="header" name="header">
+        <ul class="g-c h-left">
+            <li class="h-link-app">
+                <a class="a-header">您的新闻</a>
+            </li>
+
+        </ul>
+        <ul class="h-right g-c">
+            <li style="margin-right: 14px;" class="g-active">
+                <div class="h-login">
+                    <a>登录</a>
+                </div>
+            </li>
+            <li><a>注册</a></li>
+
+        </ul>
+    </header>
+    <!--<script src="js/header.js"></script>-->
+    <div class="g-content">
+        <div class="g-context g-c">
+            <div class="index-lf-zhanwei"></div>
+            <div class="index-lf">
+                <ul>
+                    <li><a class="i-active" href="#">推荐</a></li>
+                    <li><a href="#">热点</a></li>
+                    <li><a href="#">视频</a></li>
+                    <li><a href="#">图片</a></li>
+                    <li><a href="#">段子</a></li>
+                    <li><a href="#">社会</a></li>
+                    <li><a href="#">娱乐</a></li>
+                    <li><a href="#">科技</a></li>
+                    <li><a href="#">体育</a></li>
+                    <li><a href="#">汽车</a></li>
+                    <li><a href="#">财经</a></li>
+                    <li><a>搞笑</a></li>
+                    <li>
+                        <a class="index-lf-more">
+                            更多
+                        </a>
+                        <ul class="index-lf-more-ul">
+                            <li><a>军事</a></li>
+                            <li><a>国际</a></li>
+                            <li><a>时尚</a></li>
+                            <li><a>旅游</a></li>
+                            <li><a>探索</a></li>
+                            <li><a>育儿</a></li>
+                            <li><a>故事</a></li>
+                            <li><a>养生</a></li>
+                            <li><a>美文</a></li>
+                            <li><a>游戏</a></li>
+                            <li><a>美食</a></li>
+                            <li><a>历史</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="index-md">
+
+                <!--列表新闻-->
+                <div class="list-news-container">
+
+                    <ul class="news-list" id="news_id">
+{#
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+            <div class="back-top">
+                <span class="top-sam">刷新</span>
+                <a class="top-sam" href="#header">向上</a>
+            </div>
+        </div>
+    </div>
+</div>
+{#<script src="{% static "js/indexScrollControll.js" %}"></script>#}
+<script src= "static/js/index.js"></script>
+</body>
+</html>

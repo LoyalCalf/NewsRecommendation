@@ -3,7 +3,7 @@
 # @Author  : 陈强
 # @FileName: NB.py
 # @Software: PyCharm
-# -*- coding: UTF-8 -*-
+
 from sklearn.naive_bayes import MultinomialNB
 import pickle
 import os
@@ -17,8 +17,8 @@ Parameters:
 	folder_path - 文本存放的路径
 Returns:
 	all_words_list - 按词频降序排序的训练集列表
-	train_data_list - 训练集列表
-	train_class_list - 训练集标签列表
+	data_list - 训练集列表
+	class_list - 训练集标签列表
 
 """
 
@@ -33,10 +33,8 @@ def trainTextProcessing(folder_path):
         new_folder_path = os.path.join(folder_path, folder)  # 根据子文件夹，生成新的路径
         files = os.listdir(new_folder_path)  # 存放子文件夹下的txt文件的列表
 
-
         # 遍历每个txt文件
         for file in files:
-
             with open(os.path.join(new_folder_path, file), 'r', encoding='utf-8') as f:  # 打开txt文件
                 raw = f.read()
 
@@ -45,8 +43,6 @@ def trainTextProcessing(folder_path):
 
             data_list.append(word_list)  # 添加数据集数据
             class_list.append(folder)  # 添加数据集类别
-
-
 
     all_words_dict = {}  # 统计训练集词频
     for word_list in data_list:
@@ -63,7 +59,6 @@ def trainTextProcessing(folder_path):
     return all_words_list, data_list, class_list
 
 
-
 """
 函数说明:读取文件里的内容，并去重
 
@@ -73,6 +68,8 @@ Returns:
 	words_set - 读取的内容的set集合
 
 """
+
+
 def MakeWordsSet(words_file):
     words_set = set()  # 创建set集合
     with open(words_file, 'r', encoding='utf-8') as f:  # 打开文件
@@ -94,7 +91,7 @@ Returns:
 """
 
 
-def TextFeatures(data_list,feature_words):
+def TextFeatures(data_list, feature_words):
     def text_features(text, feature_words):  # 出现在特征集中，则置1
         text_words = set(text)
         features = [1 if word in text_words else 0 for word in feature_words]
@@ -102,7 +99,7 @@ def TextFeatures(data_list,feature_words):
 
     feature_list = [text_features(text, feature_words) for text in data_list]
     # test_feature_list = [text_features(text, feature_words) for text in test_data_list]
-    return feature_list # 返回结果
+    return feature_list  # 返回结果
 
 
 """
@@ -121,7 +118,7 @@ def words_dict(all_words_list, stopwords_set=set()):
     feature_words = []  # 特征列表
     n = 1
     for t in range(0, len(all_words_list), 1):
-        if n > 5000:							#feature_words的维度为5000
+        if n > 5000:  # feature_words的维度为5000
             break
         # 如果这个词不是数字，并且不是指定的结束语，并且单词长度大于1小于5，那么这个词就可以作为特征词
         if not all_words_list[t].isdigit() and all_words_list[t] not in stopwords_set and 1 < len(
@@ -141,22 +138,21 @@ Parameters:
 """
 
 
-def trainTextClassifier(train_feature_list,train_class_list,feature_words):
+def trainTextClassifier(train_feature_list, train_class_list, feature_words):
     classifier = MultinomialNB(alpha=0.1).fit(train_feature_list, train_class_list)
     # s = pickle.dumps(classifier)
-    #保存训练模型
-    joblib.dump(classifier,'./trainModel/trainModel.m')
-    #保存特征集
+    # 保存训练模型
+    joblib.dump(classifier, './trainModel/trainModel.m')
+    # 保存特征集
     fw = pickle.dumps(feature_words)
-    with open('./trainModel/feature_words.m','wb') as f:
+    with open('./trainModel/feature_words.m', 'wb') as f:
         f.write(fw)
-
 
 
 if __name__ == '__main__':
     # 文本预处理
     folder_path = './trainData'  # 训练集存放地址
-    all_words_list, train_data_list, train_class_list= trainTextProcessing(folder_path)
+    all_words_list, train_data_list, train_class_list = trainTextProcessing(folder_path)
 
     # 生成stopwords_set
     stopwords_file = 'stop_words.txt'
@@ -166,5 +162,4 @@ if __name__ == '__main__':
 
     train_feature_list = TextFeatures(train_data_list, feature_words)
 
-    trainTextClassifier(train_feature_list,train_class_list,feature_words)
-
+    trainTextClassifier(train_feature_list, train_class_list, feature_words)

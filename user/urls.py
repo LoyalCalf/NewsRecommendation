@@ -8,10 +8,7 @@ from django.conf.urls import url, include
 from user import views
 
 urlpatterns = [
-
-    url(r'^user_behavior/$', views.UserBehavior.as_view()),
-    url(r'^login/$', views.Login.as_view()),
-    url(r'^register/$', views.Register.as_view()),
-    url(r'^user_profile/$', views.UserProfileSetting.as_view()),
-
+    url(r'^login/', views.login),
+    url(r'^register/', views.register),
+    url(r'^account/activate/(?P<token>[\w\-]+.[\w\-]+.[\w\-]+)/$', views.active_user.as_view(), name='active_user')
 ]
