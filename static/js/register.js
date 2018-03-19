@@ -64,7 +64,7 @@ function Register(){
             success:function(data){
                 if(data.code===200){
                     //当注册成功时，应当直接跳回新闻页面，传递用户的信息到主页面
-                    document.location="/news?format=json";
+                    document.location="/news";
                 }
                 else{
                     alert(data.msg);

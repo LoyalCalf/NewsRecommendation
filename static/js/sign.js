@@ -63,7 +63,7 @@ function signIn(){
                     document.location = "/news?id=" + data.id;
                 }
                 else{
-                    alert("登陆失败，请检查用户名和密码");
+                    alert(data.msg);
                     //失败时清空password的内容
                     $("#password").val("");
                 }
