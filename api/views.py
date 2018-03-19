@@ -179,6 +179,7 @@ class Login(APIView):
 
     def post(self, request):
         try:
+            print("收到登陆请求")
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)

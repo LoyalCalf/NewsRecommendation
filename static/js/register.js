@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#register").click(Register());
+    $("#register").click(Register);
 });
 
 //csrf token验证，用于django post请求验证，在使用ajax之前对其进行加载
@@ -41,17 +41,17 @@ jQuery(document).ajaxSend(function(event, xhr, settings) {
 });
 
 function Register(){
-    var username = $("#username");
-    var password = $("#password");
-    var passwordRe = $("#passwordRe");
-    var email = $("#email");
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var passwordRe = $("#confirm_password").val();
+    var email = $("#email").val();
     if(username.length === 0 || password.length === 0 || email.length === 0){
         alert("用户名，密码和邮箱不能为空!!");
         return "";
     }
     if(password === passwordRe){
         $.ajax({
-            url:'/register',
+            url:'/api/register/',
             type:'POST',
             async:true,    //或false,是否异步
             data:{
@@ -64,7 +64,7 @@ function Register(){
             success:function(data){
                 if(data.code===200){
                     //当注册成功时，应当直接跳回新闻页面，传递用户的信息到主页面
-                    document.location="/news?id="+data.id;
+                    document.location="/news?format=json";
                 }
                 else{
                     alert(data.msg);

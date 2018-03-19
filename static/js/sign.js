@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //给登陆按钮绑定事件
-    $("#signIn").click(signIn());
+    $("#signIn").click(signIn);
 });
 
 //csrf token验证，用于django post请求验证，在使用ajax之前对其进行加载
@@ -47,17 +47,17 @@ function signIn(){
     var password = $("#password").val();
     if(username.length !== 0 && password.length !== 0){
         $.ajax({
-            url:'api/login/?format=json',
             type:'POST',
-            async:true,    //或false,是否异步
+            url:'/api/login/',
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             data:{
                 username: username,
-                password: password
+                password: password,
             },
             timeout:5000,    //超时时间
-            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             success:function(data){
                 if(data.code===200){
+                    alert("ok");
                     //这里有待进行商榷，可能有头像框，昵称栏等其他信息，且用户登陆之后推荐信息会发生变化，倾向于重新刷新页面
                     //跳转到新闻界面，传递id参数，在新闻界面进行id参数的解析，生成对应的用户信息
                     document.location = "/news?id=" + data.id;
@@ -68,15 +68,41 @@ function signIn(){
                     $("#password").val("");
                 }
             },
-            error:function(xhr){
-                console.log('错误');
-            },
-            complete:function(){
-                console.log('登陆成功！');
-            }
         })
+        // $.ajax({
+        //     url:'/api/login',
+        //     type:'POST',
+        //     async:true,    //或false,是否异步
+        //     data:{
+        //         username: username,
+        //         password: password,
+        //         format: "json"
+        //     },
+        //     timeout:5000,    //超时时间
+        //     dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        //     success:function(data){
+        //         if(data.code===200){
+        //             alert("ok");
+        //             //这里有待进行商榷，可能有头像框，昵称栏等其他信息，且用户登陆之后推荐信息会发生变化，倾向于重新刷新页面
+        //             //跳转到新闻界面，传递id参数，在新闻界面进行id参数的解析，生成对应的用户信息
+        //             document.location = "/news?id=" + data.id;
+        //         }
+        //         else{
+        //             alert("登陆失败，请检查用户名和密码");
+        //             //失败时清空password的内容
+        //             $("#password").val("");
+        //         }
+        //     },
+        //     error:function(){
+        //         console.log('错误');
+        //     },
+        //     complete:function(){
+        //         console.log('登陆成功！');
+        //     }
+        // })
     }
     else{
         alert("用户名和密码不能为空!!!");
+        return false;
     }
 }
