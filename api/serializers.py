@@ -6,7 +6,7 @@
 
 
 from rest_framework import serializers
-from news.models import news, news_comment
+from news.models import news, news_comment,search_hot
 from user.models import user_profile
 
 
@@ -23,6 +23,10 @@ class NewsContentSerializer(serializers.ModelSerializer):
         fields = ('news_id', 'news_link', 'source', 'pubtime', 'title', 'content', 'html_content', 'image', 'tag',
                   'classification')
 
+# class HotSearchSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = search_hot
+#         fields = ''
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:

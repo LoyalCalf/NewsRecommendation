@@ -10,9 +10,11 @@ from api import views
 urlpatterns = [
     url(r'^news/$', views.NewsList.as_view()),
     url(r'^news/(?P<pk>[0-9]+)/$', views.NewsContent.as_view()),
-    url(r'^news_recommendation/', views.NewsRecommendation.as_view()),
+    url(r'^news_recommendation/', views.CBRecommendation.as_view()),
     url(r'^news_hot/', views.NewsHot.as_view()),
     url(r'^news_comment/', views.NewsComments.as_view()),
+    url(r'^hot_search/', views.HotSearch.as_view()),
+    url(r'^news_search/', views.NewsSearch.as_view()),
 
     url(r'^user_behavior/$', views.UserBehavior.as_view()),
     url(r'^login/$', views.Login.as_view()),

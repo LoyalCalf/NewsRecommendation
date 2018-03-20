@@ -88,3 +88,16 @@ class news_hot(models.Model):
 
     class Meta():
         ordering = ['-score', '-pubtime']
+
+class search_hot(models.Model):
+    """
+    存储热门搜索的信息
+    """
+    key_words = models.CharField(max_length=50)
+    date_created = models.DateTimeField(auto_now_add=True)
+    score = models.FloatField(default=0)   #搜索得分
+    count = models.IntegerField(default=0)  #搜索次数
+
+    class Meta():
+        ordering = ['-count', '-date_created']
+

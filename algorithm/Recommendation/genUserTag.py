@@ -15,7 +15,7 @@ from user.models import user_tag_score
 from django.forms import model_to_dict
 
 
-class UserTag():
+class UserTag(object):
     """
     user_tag_score+=news_tag_score*behavior_type*behavior_way
     用户阅读的资讯的分数*行为类型（1.仅阅读；2.点赞；-1：不喜欢；-2：阅读后点踩）*阅读方式（1.通过推荐；2.搜索，说明其主动对该资讯感兴趣）

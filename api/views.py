@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2018/3/18 14:20
 # @Author  : 陈强
-# @FileName: api.py
+# @FileName: views.py
 # @Software: PyCharm
 
 
 from api.serializers import NewsAbstractSerializer, NewsContentSerializer, NewsCommentSerializer
-from news.models import news, news_profile, news_hot, news_comment
+from news.models import news, news_profile, news_hot, news_comment,search_hot
 from rest_framework import generics
 from algorithm.Recommendation import UserCF, ContentBased
 from django.core.mail import send_mail
@@ -17,9 +17,12 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from user.utils import create_thumbnail, Token
 from rest_framework.response import Response
-from user.models import user_behavior, user_profile, user_tag_score
+from user.models import user_behavior, user_profile, user_tag_score,user_search
 from rest_framework.views import APIView
 from algorithm.Recommendation.genUserTag import UserTag
+from datetime import datetime, timedelta
+import time
+
 
 """News"""
 
@@ -42,10 +45,10 @@ class NewsContent(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NewsContentSerializer
 
 
-class NewsRecommendation(APIView):
+class CBRecommendation(APIView):
     """
     请求：GET
-    功能：资讯推荐
+    功能：基于内容的资讯推荐
     参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐），offset
     URL格式：api/news_recommendation/?classification=社会&offset=10
     说明：offset主要是为了给未登陆用户推荐热点新闻，如果用户登录则推荐新闻，该参数没有影响，因此统一传递此参数
@@ -64,7 +67,7 @@ class NewsRecommendation(APIView):
                 hot = news_hot.objects.order_by('-pubtime')[:1]  # 用户没有浏览过资讯就已最新的热点新闻作为基础
                 news_id = hot[0].news_id
 
-            recom_news_id = ContentBased.ContenBasedRecommendation().recommendation(user.id, news_id, classification)
+            recom_news_id = ContentBased.ContentBasedRecommendation().recommendation(user.id, news_id, classification)
             newsList = news.objects.filter(news_id__in=recom_news_id)
             serializer = NewsAbstractSerializer(newsList, many=True)
             return Response(serializer.data)
@@ -91,6 +94,17 @@ class NewsRecommendation(APIView):
             # res = {'msg':'用户未登陆','code':300}
             # return Response(res)
 
+class UserCFRecommendation(APIView):
+    """
+    请求：GET
+    功能：上拉时资讯推荐，基于用户的协同过滤算法，
+    参数：classification（类型，直接使用中文，比如classification=社会，也可以不传递，则返回所有类型的推荐），offset
+    URL格式：api/news_recommendation/?classification=社会&offset=10
+    说明：offset主要是为了给未登陆用户推荐热点新闻，如果用户登录则推荐新闻，该参数没有影响，因此统一传递此参数
+    """
+    def get(self,request):
+
+        pass
 
 class NewsComments(APIView):
     """
@@ -165,6 +179,43 @@ class NewsHot(APIView):
         except:
 
             return Response({'msg': 'error', 'code': 300})
+
+class NewsSearch(APIView):
+    """
+    请求：GET
+    功能：用户搜索后将搜索的内容发给后台
+    参数：q(搜索内容)
+    """
+    def get(self,request):
+        if request.user.is_authenticated():
+            user_id = User.objects.get(username=request.user.username).id
+        else:
+            user_id = None
+        q = request.GET.get('q')
+        if not q:
+            return Response({'msg': 'error', 'code': 300})
+        dic = {'content':q,'key_words':q,'user_id':user_id}
+        user_search.objects.create(**dic)
+        return Response({'msg':'success','code':200})
+
+class HotSearch(APIView):
+    """
+    请求：GET
+    功能：返回热搜
+    参数：_t(时间戳),hours(多长时间内的热搜，比如24小时热搜)
+    格式：api/hot_search/?_t=15xxxxxxxxxx&hours=24
+    """
+    def get(self,request):
+        _t = request.GET.get('_t')
+        hours = request.GET.get('hours',24)
+        min_time = self._get_days_before_today(hours)
+        res = search_hot.objects.filter(date_created__gte=min_time).order_by('-count')[:10]
+        data = [i.key_words for i in res]
+        return Response({'res':data})
+
+    def _get_days_before_today(self,hours):
+        return datetime.now() - timedelta(hours=hours)
+
 
 
 """User"""

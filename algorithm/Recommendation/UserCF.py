@@ -13,7 +13,7 @@ import os, django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "NewsRecommendation.settings")
 django.setup()
-from user.models import user_tag_score, user_similarity, user_behavior
+from user.models import user_tag_score, user_similarity, user_behavior, user_cf_recommendation
 
 """基于用户的协同过滤算法，根据用户兴趣矩阵计算相似用户，用户量过大时计算量过大，不利于在线计算，用于离线计算相似用户"""
 
@@ -110,10 +110,11 @@ class UserCFRecommendation(object):
     def __init__(self):
         pass
 
-    def get_days_before_today(self, days=2):
+    def get_days_before_today(self, days=100):
         return datetime.now() - timedelta(days=days)
 
     def get_data(self, user_id):
+
         user = user_similarity.objects.filter(user_id=user_id)
         if user.exists():
             before_today = self.get_days_before_today()
@@ -137,13 +138,14 @@ class UserCFRecommendation(object):
 
             # 取差集，即推荐的资讯id集合
             difference_set = similary_user_set.difference(user_set)
-            # print(difference_set)
+            print(difference_set)
             return difference_set
         else:
+            """如果没有相似推荐"""
             return None
 
 
 if __name__ == '__main__':
-    CalculateSimilarityUser().similarity_user()
-    # UserCF_Recommendation().get_data(2)
-    # print(3.32780127197021e-59**2)
+    # CalculateSimilarityUser().similarity_user()
+    UserCFRecommendation().get_data(7)
+

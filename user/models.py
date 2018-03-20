@@ -62,9 +62,9 @@ class user_tag_score(models.Model):
 
 
 class user_search(models.Model):
-    user = models.ForeignKey(User, related_name='search')
-    content = models.CharField(max_length=50, null=False)
-    keyword = models.CharField(max_length=50, null=False)
+    user = models.ForeignKey(User, related_name='search',null=True)          #有可能没有登陆
+    content = models.CharField(max_length=50, null=True)
+    key_words = models.CharField(max_length=50, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta():
@@ -86,6 +86,18 @@ class user_recommendation(models.Model):
 
     class Meta():
         ordering = ['-date_created']
+
+#保存给用户推荐的资讯，基于用户协同过滤算法，用于离线计算推荐资讯
+class user_cf_recommendation(models.Model):
+    user = models.ForeignKey(User,related_name='UserCF')
+    news = models.ForeignKey(news,null=False)
+    classification = models.CharField(max_length=20)           #分类
+    pubtime = models.DateTimeField(auto_now_add=False)         #资讯发布的时间
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta():
+        ordering = ['-pubtime']
+
 
 
 class user_collection(models.Model):

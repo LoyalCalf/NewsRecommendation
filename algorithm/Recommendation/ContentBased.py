@@ -9,26 +9,25 @@
 """
 import numpy as np
 import os, django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "NewsRecommendation.settings")
 django.setup()
 from news.models import news_tag_score, news
 from user.models import user_recommendation
 from datetime import datetime, timedelta
 
-class ContenBasedRecommendation(object):
+
+class ContentBasedRecommendation(object):
     def __init__(self):
         pass
 
-
-    def get_days_before_today(days=30):
+    def get_days_before_today(self, days=1):
         return datetime.now() - timedelta(days=days)
 
-
-    def get_data(user_id, news_id, classification=None):
+    def get_data(self, user_id, news_id, classification=None):
         # 可以取出 当天资讯（考虑时间因素），过滤掉已经推荐过给用户的资讯（去重因素）
         news_recommendation = user_recommendation.objects.filter(user_id=user_id)
-        news_today = news.objects.filter(pubtime__range=[get_days_before_today(), datetime.now()]).order_by('-pubtime')
+        news_today = news.objects.filter(pubtime__range=[self.get_days_before_today(), datetime.now()]).order_by(
+            '-pubtime')
         if classification:
             news_list = news_today.filter(classification=classification).values_list('news_id', flat=True)
         else:
@@ -45,24 +44,21 @@ class ContenBasedRecommendation(object):
 
         return news_data, other_news_data
 
-
     # 更新推荐表
-    def update_data(user_id, news_id):
+    def update_data(self, user_id, news_id):
         user_recommendation.objects.create(user_id=user_id, news_id=news_id)
 
-
     # 余弦相似度，用于计算两个资讯间的相似度
-    def cosine_similarity(x, y):
+    def cosine_similarity(self, x, y):
         num = sum(np.multiply(np.array(x), np.array(y)))
         denom = np.linalg.norm(x) * np.linalg.norm(y)
         return round(num / float(denom), 3)
 
-
     # 根据用户id，资讯id，推荐10条和此资讯最相似的资讯
-    def recommendation(user_id, news_id, classification=None):
+    def recommendation(self, user_id, news_id, classification=None):
         # 资讯的类别，如果为空则取出所有类型的资讯
 
-        news_data, other_news_data = get_data(user_id, news_id, classification)
+        news_data, other_news_data = self.get_data(user_id, news_id, classification)
         # 当前资讯的特征值行向量
         news_matrix = list(news_data[0][1:])
         # 取出的资讯特征值字典 如 1:[0.1,0.2....]
@@ -76,7 +72,7 @@ class ContenBasedRecommendation(object):
             other_news_dict[i[0]] = list(i[1:])
 
         for k, v in other_news_dict.items():
-            similarity_dict[k] = cosine_similarity(news_matrix, v)
+            similarity_dict[k] = self.cosine_similarity(news_matrix, v)
 
         # 对分数进行排序
         sorted_list = sorted(similarity_dict.items(), key=lambda item: item[1], reverse=True)
@@ -86,7 +82,7 @@ class ContenBasedRecommendation(object):
             if count >= 10:
                 break
             recommendation_list.append(k[0])
-            update_data(user_id, k[0])
+            self.update_data(user_id, k[0])
             count += 1
 
         # print(recommendation_list)

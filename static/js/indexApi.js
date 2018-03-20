@@ -88,7 +88,7 @@ function upRollAction(){
         $.ajax({
             type:'GET',
             dataType:"json",
-            url:"api/news_recommandation/?format=json&limit=10&offset="+$("#news_id").children().length,
+            url:"api/news_recommendation/?format=json&limit=10&offset="+$("#news_id").children().length,
             success :function (data) {
                 var listUl=$("#news_id");
                 for(var i=0;i<data.results.length;i++){
