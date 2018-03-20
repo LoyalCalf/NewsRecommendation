@@ -179,6 +179,7 @@ class Login(APIView):
 
     def post(self, request):
         try:
+            print("收到登陆请求")
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
@@ -211,7 +212,7 @@ class Register(APIView):
                 return Response({'msg': '用户已存在', 'code': 300})
             user = User(username=username, password=make_password(password), email=email, is_active=False)
             # User.objects.create_user(username=username,password=password,email=email,is_active=False)
-            self._send_register_email(user)
+            # self._send_register_email(user)
             user.save()
             user_profile.objects.create(user_id=user.id, nickname=username)  # 注册完成同时添加额外信息，保证信息完整
             user_tag_score.objects.create(user_id=user.id)
