@@ -105,7 +105,20 @@
     /*点击刷新*/
     function refresh() {
         $('.back-top>span').on('click',function () {
-            location.reload(true);
+            $.ajax({
+                type:'GET',
+                dataType:"json",
+                url:"api/news_recommendation/?format=json&limit=10&offset="+$("#news_id").children().length,
+                success :function (data) {
+                    console.log(data[0].image);
+                    var listUl=$("#news_id");
+                    for(var i= data.length-1 ;i >=  0; i--){
+                        listUl.prepend(setDiv(data[i]));
+                    }
+                },
+                error:function (e) {
+                    alert("失败")
+                }});
         })
     }
 

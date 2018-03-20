@@ -1,6 +1,26 @@
 $(document).ready(function () {
+        // alert("执行ajax函数之前");
+       $.ajax({
+           type:'GET',
+           dataType:"json",
+           url:"api/news/?format=json&limit=10",
+           success :function (data) {
+               var listUl=$("#news_id");
+               for(var i=0;i<data.results.length;i++){
+                   var  item=setDiv(data.results[i])
+                   listUl.append(item);
+                }
+                downRollAction();
+                classRecommendation();
+           },
+           error:function (e) {
+               alert("失败")
+           }
+       });
 
-     function setDiv(item){
+  });
+
+ function setDiv(item){
         if(item.image)
         {
             var img = item.image.split(",")[0];
@@ -34,21 +54,71 @@ $(document).ready(function () {
         return template
 }
 
-        // alert("执行ajax函数之前");
-       $.ajax({
-           type:'GET',
-           dataType:"json",
-           url:"api/news/?format=json&limit=100",
-           success :function (data) {
-               var listUl=$("#news_id");
-               for(var i=0;i<=data.results.length;i++){
-                   var  item=setDiv(data.results[i])
-                   listUl.append(item);
-              }
-           },
-           error:function (e) {
-               alert("失败")
-           }
-       })
+//给页面绑定滚动轴事件，当页面下拉到最下层时进行动态请求更新页面
+function downRollAction(){
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight === scrollHeight) {
+            //当下拉到页面最下端时
+            //暂时不添加任何提示样式，通过ajax 和 alert进行调试
+            $.ajax({
+                type:'GET',
+                dataType:"json",
+                url:"api/news/?format=json&limit=10&offset="+$("#news_id").children().length,
+                success :function (data) {
+                    var listUl=$("#news_id");
+                    for(var i=0;i<data.results.length;i++){
+                    var  item = setDiv(data.results[i])
+                    listUl.append(item);
+                }
+                },
+                error:function (e) {
+                    alert("失败")
+                }
+            });
+        }
+    });
+}
 
-  });
+function upRollAction(){
+    //给刷新按钮绑定函数
+     $("#reflesh").click(function(){
+        $.ajax({
+            type:'GET',
+            dataType:"json",
+            url:"api/news_recommandation/?format=json&limit=10&offset="+$("#news_id").children().length,
+            success :function (data) {
+                var listUl=$("#news_id");
+                for(var i=0;i<data.results.length;i++){
+                    var  item = setDiv(data.results[i]);
+                    listUl.append(item);
+                }
+            },
+            error:function (e) {
+            alert("失败")
+        }});
+     });
+}
+
+//根据不同种类的新闻进行不同种类的请求
+function classRecommendation(){
+    $(".newsClass").click(function(){
+        $.ajax({
+            type:'GET',
+            dataType:"json",
+            url:"api/news/?format=json&limit=10&classification="+$(this).attr("id"),
+            success :function (data) {
+                var listUl=$("#news_id");
+                listUl.empty();
+                for(var i=0;i<data.results.length;i++){
+                    var  item = setDiv(data.results[i]);
+                    listUl.append(item);
+                }
+            },
+            error:function (e) {
+                alert("失败")
+         }});
+    });
+}
