@@ -18,6 +18,11 @@ def register(request):
 def login(request):
     return render(request,'login.html')
 
+def user_info(request):
+    return render(request,'user/personal.html')
+
+def user_change(request):
+    return render(request,'user/changeinfo.html')
 
 # 用户邮箱验证
 class active_user(TemplateView):

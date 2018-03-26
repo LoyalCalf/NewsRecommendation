@@ -27,8 +27,7 @@ class news(models.Model):
 
 
 class news_tag_score(models.Model):
-    news = models.OneToOneField(news, on_delete=models.CASCADE, primary_key=True)
-
+    news = models.OneToOneField(news, on_delete=models.CASCADE, primary_key=True,related_name='news_tag')
     news_entertainment = models.FloatField(default=0, null=False)
     news_fashion = models.FloatField(default=0, null=False)
     news_finance = models.FloatField(default=0, null=False)

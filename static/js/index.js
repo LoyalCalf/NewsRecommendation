@@ -108,9 +108,9 @@
             $.ajax({
                 type:'GET',
                 dataType:"json",
-                url:"api/news_recommendation/?format=json&limit=10&offset="+$("#news_id").children().length,
+                url:"api/news_recommendation/?format=json&offset="+$("#news_id").children().length,
                 success :function (data) {
-                    console.log(data[0].image);
+                    //console.log(data[0].image);
                     var listUl=$("#news_id");
                     for(var i= data.length-1 ;i >=  0; i--){
                         listUl.prepend(setDiv(data[i]));

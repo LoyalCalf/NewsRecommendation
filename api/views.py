@@ -6,7 +6,7 @@
 
 
 from api.serializers import NewsAbstractSerializer, NewsContentSerializer, NewsCommentSerializer
-from news.models import news, news_profile, news_hot, news_comment,search_hot
+from news.models import news, news_profile, news_hot, news_comment, search_hot
 from rest_framework import generics
 from algorithm.Recommendation import UserCF, ContentBased
 from django.core.mail import send_mail
@@ -17,17 +17,27 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from user.utils import create_thumbnail, Token
 from rest_framework.response import Response
-from user.models import user_behavior, user_profile, user_tag_score,user_search
+from user.models import user_behavior, user_profile, user_tag_score, user_search, user_collection
 from rest_framework.views import APIView
 from algorithm.Recommendation.genUserTag import UserTag
 from datetime import datetime, timedelta
-import time
-
 
 """News"""
 
 
-class NewsList(generics.ListCreateAPIView):
+# class NewsList(generics.ListCreateAPIView):
+#     """
+#     请求：GET
+#     功能：所有新闻的API
+#     参数：offset和limit
+#     URL格式：api/news/(news_id)
+#     例子：api/news/?limit=10&offset=10
+#     说明：带上news_id则请求具体的新闻内容
+#     """
+#     queryset = news.objects.all()
+#     serializer_class = NewsAbstractSerializer
+
+class NewsList(APIView):
     """
     请求：GET
     功能：所有新闻的API
@@ -36,8 +46,17 @@ class NewsList(generics.ListCreateAPIView):
     例子：api/news/?limit=10&offset=10
     说明：带上news_id则请求具体的新闻内容
     """
-    queryset = news.objects.all()
-    serializer_class = NewsAbstractSerializer
+
+    def get(self, request):
+        classification = request.GET.get('classification')
+        offset = int(request.GET.get('offset', 0))
+        limit = 10
+        if classification:
+            news_list = news.objects.filter(classification=classification).order_by('-pubtime')[offset:offset + limit]
+        else:
+            news_list = news.objects.order_by('-pubtime')[offset:offset + limit]
+        serializer = NewsAbstractSerializer(news_list, many=True)
+        return Response({'code': 200, 'msg': 'success', 'results': serializer.data})
 
 
 class NewsContent(generics.RetrieveUpdateDestroyAPIView):
@@ -94,6 +113,7 @@ class CBRecommendation(APIView):
             # res = {'msg':'用户未登陆','code':300}
             # return Response(res)
 
+
 class UserCFRecommendation(APIView):
     """
     请求：GET
@@ -102,9 +122,10 @@ class UserCFRecommendation(APIView):
     URL格式：api/news_recommendation/?classification=社会&offset=10
     说明：offset主要是为了给未登陆用户推荐热点新闻，如果用户登录则推荐新闻，该参数没有影响，因此统一传递此参数
     """
-    def get(self,request):
 
+    def get(self, request):
         pass
+
 
 class NewsComments(APIView):
     """
@@ -162,6 +183,9 @@ class NewsComments(APIView):
             return Response(res)
 
 
+"""热点新闻"""
+
+
 class NewsHot(APIView):
     def get(self, request):
         try:
@@ -180,13 +204,18 @@ class NewsHot(APIView):
 
             return Response({'msg': 'error', 'code': 300})
 
+
+"""用户搜索"""
+
+
 class NewsSearch(APIView):
     """
     请求：GET
     功能：用户搜索后将搜索的内容发给后台
     参数：q(搜索内容)
     """
-    def get(self,request):
+
+    def get(self, request):
         if request.user.is_authenticated():
             user_id = User.objects.get(username=request.user.username).id
         else:
@@ -194,9 +223,13 @@ class NewsSearch(APIView):
         q = request.GET.get('q')
         if not q:
             return Response({'msg': 'error', 'code': 300})
-        dic = {'content':q,'key_words':q,'user_id':user_id}
+        dic = {'content': q, 'key_words': q, 'user_id': user_id}
         user_search.objects.create(**dic)
-        return Response({'msg':'success','code':200})
+        return Response({'msg': 'success', 'code': 200})
+
+
+"""热搜"""
+
 
 class HotSearch(APIView):
     """
@@ -205,20 +238,22 @@ class HotSearch(APIView):
     参数：_t(时间戳),hours(多长时间内的热搜，比如24小时热搜)
     格式：api/hot_search/?_t=15xxxxxxxxxx&hours=24
     """
-    def get(self,request):
+
+    def get(self, request):
         _t = request.GET.get('_t')
-        hours = request.GET.get('hours',24)
+        hours = request.GET.get('hours', 24)
         min_time = self._get_days_before_today(hours)
         res = search_hot.objects.filter(date_created__gte=min_time).order_by('-count')[:10]
         data = [i.key_words for i in res]
-        return Response({'res':data})
+        return Response({'res': data})
 
-    def _get_days_before_today(self,hours):
+    def _get_days_before_today(self, hours):
         return datetime.now() - timedelta(hours=hours)
 
 
-
 """User"""
+
+"""登陆"""
 
 
 class Login(APIView):
@@ -230,9 +265,8 @@ class Login(APIView):
 
     def post(self, request):
         try:
-            print("收到登陆请求")
-            username = request.POST['username']
-            password = request.POST['password']
+            username = request.POST.get('username')
+            password = request.POST.get('password')
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
@@ -241,6 +275,9 @@ class Login(APIView):
                 return Response({'msg': '用户名或密码错误', 'code': 300})
         except:
             return Response({'msg': '参数错误', 'code': 300})
+
+
+"""注册"""
 
 
 class Register(APIView):
@@ -285,6 +322,9 @@ class Register(APIView):
         send_mail('注册用户验证信息', message, '1345285903@qq.com', [str(user.email)])
 
 
+"""用户行为信息"""
+
+
 class UserBehavior(APIView):
     """
     请求：GET
@@ -292,7 +332,6 @@ class UserBehavior(APIView):
     参数：behavior_type（具体参数参看数据库建模文档），news_id（对某条资讯产生的行为）,behavoir_way(产生行为的方式，搜索阅读和推荐阅读)
     """
 
-    # @method_decorator(csrf_exempt)
     def get(self, request):
 
         if request.user.is_authenticated():
@@ -311,6 +350,9 @@ class UserBehavior(APIView):
             return Response(res)
 
 
+"""用户信息设置"""
+
+
 class UserProfileSetting(APIView):
     """
     请求：POST
@@ -324,7 +366,7 @@ class UserProfileSetting(APIView):
             gender = request.POST.get('gender', -1)
             birthday = request.POST.get('birthday')
             location = request.POST.get('location')
-            education = request.POST.get('enducation')
+            education = request.POST.get('education')
             tag = request.POST.get('tag')
             description = request.POST.get('description')
             avatar = request.FILES.get('avatar')
@@ -351,7 +393,40 @@ class UserProfileSetting(APIView):
 
 
 class UserCollection(APIView):
-    pass
+    def get(self, request):
+        """
+        请求：GET
+        功能：获取用户收藏的资讯
+        参数：offset(每次取10条，offset表示偏移量)
+        URL：api/user_collection/?offset=10
+        """
+        if request.user.is_authenticated():
+            offset = request.GET.get('offset', 0)
+            limit = 10
+            user_id = User.objects.get(username=request.user.username).id
+            news_list = user_collection.objects.filter(user_id=user_id).order_by('-date_created')[offset:offset + limit]
+            results = []
+            for i in news_list:
+                news_info = news.objects.get(news_id=i.news_id)
+                results.append(
+                    {'id': news_info.id, 'title': news_info.title, 'date': i.date_created, 'image': news_info.image})
+            return Response({'msg': 'success', 'code': 200, 'results': results})
+        else:
+            return Response({'msg': '用户未登陆', 'code': 300})
+
+    def post(self, request):
+        """
+        请求：POST
+        功能：用户点击收藏后将信息发送给后台
+        参数：news_id(表示要收藏的资讯id)
+        """
+        if request.user.is_authenticated():
+            user_id = User.objects.get(username=request.user.username).id
+            news_id = request.POST.get('news_id')
+            user_collection.objects.create(user_id=user_id, news_id=news_id)
+            return Response({'msg': 'success', 'code': 200})
+        else:
+            return Response({'msg': '用户未登陆', 'code': 300})
 
 # 用户邮箱验证
 # class active_user(TemplateView):

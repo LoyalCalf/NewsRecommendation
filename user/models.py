@@ -98,7 +98,15 @@ class user_cf_recommendation(models.Model):
     class Meta():
         ordering = ['-pubtime']
 
+class user_novel_recommendation(models.Model):
+    user = user = models.ForeignKey(User,related_name='novel')
+    news = models.ForeignKey(news, null=False)
+    classification = models.CharField(max_length=20)  # 分类
+    pubtime = models.DateTimeField(auto_now_add=False)  # 资讯发布的时间
+    date_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta():
+        ordering = ['-pubtime']
 
 class user_collection(models.Model):
     user = models.ForeignKey(User, related_name='collection')
