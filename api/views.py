@@ -11,7 +11,7 @@ from rest_framework import generics
 from algorithm.Recommendation import UserCF, ContentBased
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
@@ -268,13 +268,36 @@ class Login(APIView):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = auth.authenticate(username=username, password=password)
+            # print(make_password(password))
+            # user = User.objects.get(username=username)
+
+            # print(user)
+            # if check_password(password,user.password):
             if user:
                 auth.login(request, user)
                 return Response({'msg': '登陆成功', 'code': 200})
             else:
-                return Response({'msg': '用户名或密码错误', 'code': 300})
+                return Response({'msg': '密码错误', 'code': 300})
         except:
-            return Response({'msg': '参数错误', 'code': 300})
+            return Response({'msg': '用户不存在', 'code': 300})
+
+
+"""注销"""
+
+
+class Logout(APIView):
+    """
+    请求：POST
+    功能：用户注销
+
+    """
+
+    def post(self, request):
+        if request.user.is_authenticated():
+            auth.logout(request)
+            return Response({'msg': 'success', 'code': 200})
+        else:
+            return Response({'msg': 'error', 'code': 300})
 
 
 """注册"""
@@ -298,10 +321,10 @@ class Register(APIView):
 
             if user.exists():
                 return Response({'msg': '用户已存在', 'code': 300})
-            user = User(username=username, password=make_password(password), email=email, is_active=False)
+            user = User.objects.create_user(username=username, password=password, email=email, is_active=True)
             # User.objects.create_user(username=username,password=password,email=email,is_active=False)
             # self._send_register_email(user)
-            user.save()
+            #user.save()
             user_profile.objects.create(user_id=user.id, nickname=username)  # 注册完成同时添加额外信息，保证信息完整
             user_tag_score.objects.create(user_id=user.id)
             # user.save()

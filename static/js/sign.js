@@ -60,7 +60,7 @@ function signIn(){
                     alert("ok");
                     //这里有待进行商榷，可能有头像框，昵称栏等其他信息，且用户登陆之后推荐信息会发生变化，倾向于重新刷新页面
                     //跳转到新闻界面，传递id参数，在新闻界面进行id参数的解析，生成对应的用户信息
-                    document.location = "/news?id=" + data.id;
+                    document.location = "/";
                 }
                 else{
                     alert(data.msg);
