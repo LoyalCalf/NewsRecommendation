@@ -6,8 +6,8 @@ blockquote,q{quotes:none}
 blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
 table{border-collapse:collapse;border-spacing:0}
 body{background:#f8f8f8;font-family:"Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;text-align:center;color:#fff}
-.login-container{margin:10% auto 0 auto}
-.register-container{margin:6% auto 0 auto}
+.login-container{margin:10% auto 0 auto;color:#000042}
+.register-container{margin:6% auto 0 auto;color:#000042}
 @media (min-width:670px){
 	.login-container {margin: 8% auto 0 auto;}
 }

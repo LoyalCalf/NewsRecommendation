@@ -1,9 +1,12 @@
 header{
     border-bottom: 0px;
 }
+.c-title{
+    text-decoration: none;
+}
 .middlebar {
     position: relative;
-    height: 58px;
+    height: 75px;
     background: #fff;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .12);
 }
@@ -33,7 +36,8 @@ header{
 }
 .y-right {
     float: right;
-    *margin-right: -3px
+    *margin-right: -3px;
+    margin-top: 5px;
 }
 
 .wsearch .input-group {

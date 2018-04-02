@@ -1,3 +1,6 @@
+body{
+    background-color: #E8E8E8;
+}
 .clearfix:after {
     content: '\20';
     display: block;

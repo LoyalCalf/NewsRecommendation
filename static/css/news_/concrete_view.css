@@ -1,5 +1,9 @@
 .h-title{
-    padding-top:0px;
+    margin-left: 300px;
+}
+.h-title h1 a{
+    color: #000;
+    text-decoration: none
 }
 
 .left{
@@ -20,4 +24,242 @@
     bottom: 0px;
     position: absolute;
     background-color: #1b6d85;
+}
+
+
+.detail-comment {
+    margin: 30px 0
+}
+#comment .c-header {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 700
+}
+
+#comment .c-header > em {
+    font: 22px/24px Georgia;
+    color: #f85959
+}
+
+#comment .c-header .line {
+    height: 4px;
+    background-color: #3f404c;
+    margin-bottom: 20px
+}
+
+#comment .c-item {
+    padding: 14px 0;
+    border-top: 1px solid #f2f2f2
+}
+
+#comment .c-item:first-child {
+    margin-top: 22px
+}
+
+#comment .avatar-wrap {
+    float: left;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+    background: url("//s3.pstatp.com/toutiao/resource/toutiao_web/static/style/image/newindex/default40_c78f50e.png") no-repeat 50%;
+    overflow: hidden
+}
+
+#comment .avatar-wrap-center {
+    margin-top: 7px
+}
+
+#comment .avatar-wrap img {
+    width: 100%;
+    height: 100%
+}
+
+#comment .c-content {
+    margin-left: 42px;
+    overflow: hidden
+}
+
+#comment .c-content a, #comment .c-content span {
+    font-size: 14px
+}
+
+#comment .c-content p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #222
+}
+
+#comment .c-content .c-user-info {
+    margin-bottom: 4px
+}
+
+#comment .c-content .c-reply, #comment .c-content .c-reply-count, #comment .c-content .c-user-name {
+    color: #406599;
+    cursor: pointer
+}
+
+#comment .c-content .c-reply-count i, #comment .c-content .c-reply i, #comment .c-content .c-user-name i {
+    font-size: 13px;
+    color: #406599
+}
+
+#comment .c-content .c-create-time {
+    color: #777
+}
+
+#comment .c-content .c-digg {
+    color: #777;
+    cursor: pointer
+}
+
+#comment .c-content .c-digg:hover {
+    opacity: .6
+}
+
+#comment .c-content .c-digg > i {
+    color: #cacaca;
+    font-size: 15px
+}
+
+#comment .c-content .c-digg-active {
+    cursor: default;
+    color: #ed4040
+}
+
+#comment .c-content .c-digg-active:hover {
+    opacity: 1
+}
+
+#comment .c-content .c-digg-active i {
+    color: #ed4040;
+    animation-name: bounceIn;
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+#comment .c-content .c-report {
+    margin-top: 1px;
+    margin-left: 12px;
+    cursor: pointer
+}
+
+#comment .c-content .c-report:hover {
+    opacity: .6
+}
+
+#comment .c-content .c-report > i {
+    color: #cacaca;
+    font-size: 14px
+}
+
+#comment .c-content .c-footer-action {
+    margin-top: 6px;
+    font-size: 0
+}
+
+#comment .c-content .c-reply-comment {
+    margin-top: 26px
+}
+
+#comment .c-load-more {
+    display: block;
+    color: #406599;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #f4f5f6;
+    margin-top: 10px;
+    cursor: pointer
+}
+
+#comment .c-load-more.r-load-more {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px
+}
+
+#comment .no-more-tips {
+    display: block;
+    width: 300px;
+    margin: 0 auto 10px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    color: #406599
+}
+
+.inputBox{
+    margin-top: 12px
+}
+
+.inputBox .input-wrap {
+    position: relative;
+    font-size: 16px;
+    color: #bababa;
+    border: 1px solid #3f404c;
+    background: #fff;
+    margin-left: 42px;
+    height: 44px;
+    box-sizing: content-box
+}
+
+.inputBox .input-wrap.focus {
+    height: 100%
+}
+
+.inputBox .input-wrap.focus .c-textarea textarea {
+    height: 110px
+}
+
+.inputBox .input-wrap.focus .c-action {
+    position: relative;
+    background-color: #f4f5f6
+}
+
+.inputBox .input-wrap.focus .c-action .c-submit {
+    background-color: #3f404c;
+}
+
+.inputBox .input-wrap.not-main {
+    margin-left: 0
+}
+
+.inputBox .c-textarea {
+    background: #fff;
+    padding: 11px 16px 0
+}
+
+.inputBox .c-textarea textarea {
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    height: 30px;
+    resize: none;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    transition: all .4s
+}
+
+.inputBox .c-action {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    border: none;
+    height: 44px
+}
+
+.inputBox .c-action .c-submit {
+    float: right;
+    line-height: 44px;
+    background-color: #3f404c;
+    width: 110px;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    cursor: pointer
 }

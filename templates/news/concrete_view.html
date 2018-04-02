@@ -7,35 +7,22 @@
     <link rel="stylesheet" href=" ../../static/css/news_/concrete_view.css" />
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css" >
     <script src="../../static/js/lib/jquery.min.js"></script>
+    <script src="../../static/js/bootstrap.js"></script>
 </head>
 <body>
 <div>
     <div>
         {% include 'header.html' %}
-{#        <header  class="g-minwidth" style="color: #2A90D7;" id="header" name="header">#}
-{#                <ul class="g-c h-left">#}
-{#                    <li class="h-link-app">#}
-{#                        <a class="a-header">您的新闻</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#                <ul class="h-right g-c">#}
-{#                    <li style="margin-right: 14px;" class="g-active">#}
-{#                        <div class="h-login">#}
-{#                            <a>登录</a>#}
-{#                        </div>#}
-{#                    </li>#}
-{#                    <li><a>注册</a></li>#}
-{#                </ul>#}
-{#        </header>#}
-        <div class="page-header" >
+
+        <div class="page-header"  style="margin-top: 5px">
             <div class="h-title">
-                <h1><a href="../../" style="color: #000;">资讯推荐</a> </h1>
+                <h1><a href="../../" >资讯推荐</a> </h1>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="left">
-          <h1>This is left!</h1>
+{#          <h1>This is left!</h1>#}
         </div>
 {#        内容#}
         <div class="news-content" id="news-content">
@@ -47,14 +34,85 @@
 {#                  Panel content#}
 {#                </div>#}
 {#            </div>#}
+            <div class="detail-comment">
+                <a id="comment_area" href="#"></a>
+                <div id="comment">
+                    <div class="c-header"><em>6,437&nbsp;</em>条评论</div>
+                    <div class="inputBox">
+                        <div class="bui-box">
+                            <div class="avatar-wrap avatar-wrap-center"><!----></div>
+                            <div class="input-wrap">
+                                <div class="c-textarea"><textarea placeholder="写下您的评论..."></textarea></div>
+                                <div class="c-action">
+                                    <div class="c-submit">评论</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="c-item"><a href="" target="_blank" class="avatar-wrap">
+                            <img src="https://p3.pstatp.com/thumb/6c500011901c10388c05" alt=""></a>
+                            <div class="c-content">
+                                <div class="c-user-info">
+                                    <a href="/c/user/71422080806/" target="_blank" class="c-user-name">你说我听205</a>
+                                    <span class="c-create-time">17小时前</span>
+                                </div>
+                                <p>升米恩斗米仇，典型的国人心态！</p>
+                                <div class="c-footer-action">
+                                    <span class="c-reply">回复</span>
+                                    <span class="c-reply-count">&nbsp;⋅&nbsp;61条回复
+                                        <i class="bui-icon icon-arrow_down"
+                                           style="font-size: 14px; color: rgb(64, 101, 153);"></i>
+                                    </span> <!---->
+                                    <span title="举报" class="bui-right c-report">
+                                        <i class="bui-icon icon-report"
+                                           style="font-size: 14px; color: rgb(202, 202, 202);"></i>
+                                    </span>
+                                    <span title="点赞" ga_event="click_good_comment" class="bui-right c-digg">4091&nbsp;
+                                        <i class="bui-icon icon-thumbsup_line"></i>
+                                    </span>
+                                </div>
+                                <div class="J_input_0">
+                                    <div data-v-7f58aa2c="" class="inputBox">
+                                        <div data-v-7f58aa2c="" class="bui-box"><!---->
+                                            <div data-v-7f58aa2c="" class="input-wrap not-main">
+                                                <div data-v-7f58aa2c="" ga_event="click_input_comment"
+                                                     class="c-textarea"><textarea
+                                                        data-v-7f58aa2c="" placeholder="写下您的回复..."></textarea></div>
+                                                <div data-v-7f58aa2c="" ga_event="click_publish_comment"
+                                                     class="c-action">
+                                                    <div data-v-7f58aa2c="" class="c-submit">回复</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="c-reply-comment"><a href="" target="_blank" class="avatar-wrap">
+                                    <img src=alt=""></a>
+                                    <div class="c-content">
+                                        <div class="c-user-info">
+                                            <a href="" target="_blank" class="c-user-name">摸着口袋感叹</a>
+                                            <span class="c-create-time">13小时前</span>
+                                        </div>
+                                        <p>这个心态恐怕就是你自己的心态吧！！！</p>
+                                        <div class="c-footer-action"><span ga_event="click_reply_comment"
+                                                                           class="c-reply">回复</span>
+                                            <span title="点赞" ga_event="click_good_comment" class="bui-right c-digg">11&nbsp;<i
+                                                    class="bui-icon icon-thumbsup_line"></i></span></div>
+                                        <div class="J_input_0_0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="c-load-more">查看更多评论</a> <!----> <!---->
+                </div>
+            </div>
         </div>
 
-        <div>
-
-        </div>
 
         <div class="right">
-          <h1>This is right!</h1>
+{#          <h1>This is right!</h1>#}
         </div>
     </div>
 </div>
