@@ -89,7 +89,7 @@ class CBRecommendation(APIView):
             recom_news_id = ContentBased.ContentBasedRecommendation().recommendation(user.id, news_id, classification)
             newsList = news.objects.filter(news_id__in=recom_news_id)
             serializer = NewsAbstractSerializer(newsList, many=True)
-            return Response(serializer.data)
+            return Response({'code': 200, 'msg': 'success', 'results': serializer.data})
 
             # newsID = UserCF.UserCF_Recommendation().get_data(user.id)
             # if not newsID:
@@ -109,7 +109,7 @@ class CBRecommendation(APIView):
                 news_id_list = list(news_hot.objects.all()[offset:offset + limit].values_list('news_id', flat=True))
             news_list = news.objects.filter(news_id__in=news_id_list)
             serializer = NewsAbstractSerializer(news_list, many=True)
-            return Response(serializer.data)
+            return Response({'code': 200, 'msg': 'success', 'results': serializer.data})
             # res = {'msg':'用户未登陆','code':300}
             # return Response(res)
 
@@ -245,7 +245,7 @@ class HotSearch(APIView):
         min_time = self._get_days_before_today(hours)
         res = search_hot.objects.filter(date_created__gte=min_time).order_by('-count')[:10]
         data = [i.key_words for i in res]
-        return Response({'res': data})
+        return Response({'results': data})
 
     def _get_days_before_today(self, hours):
         return datetime.now() - timedelta(hours=hours)
@@ -360,9 +360,9 @@ class UserBehavior(APIView):
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user.username)
             # print(request.POST)
-            behavior_type = request.GET.get('behavior_type', 1)
-            behavior_way = request.GET.get('behavior_way', 1)
-            news_id = request.GET.get('news_id')
+            behavior_type = int(request.GET.get('behavior_type', 1))
+            behavior_way = int(request.GET.get('behavior_way', 1))
+            news_id = int(request.GET.get('news_id'))
             dic = {'behavior_type': behavior_type, 'news_id': news_id, 'user_id': user.id, 'behavior_way': behavior_way}
             user_behavior.objects.create(**dic)
             UserTag(news_id, user.id, behavior_type, behavior_way).calculate()  # 更新用户兴趣表
@@ -386,7 +386,7 @@ class UserProfileSetting(APIView):
     def post(self, request):
         if request.user.is_authenticated():
             nickname = request.POST.get('nickname', request.user.username)
-            gender = request.POST.get('gender', -1)
+            gender = int(request.POST.get('gender', -1))
             birthday = request.POST.get('birthday')
             location = request.POST.get('location')
             education = request.POST.get('education')
@@ -424,7 +424,7 @@ class UserCollection(APIView):
         URL：api/user_collection/?offset=10
         """
         if request.user.is_authenticated():
-            offset = request.GET.get('offset', 0)
+            offset = int(request.GET.get('offset', 0))
             limit = 10
             user_id = User.objects.get(username=request.user.username).id
             news_list = user_collection.objects.filter(user_id=user_id).order_by('-date_created')[offset:offset + limit]

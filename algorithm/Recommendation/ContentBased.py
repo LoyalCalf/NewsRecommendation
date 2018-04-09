@@ -20,7 +20,7 @@ class ContentBasedRecommendation(object):
     def __init__(self):
         pass
 
-    def get_days_before_today(self, days=1):
+    def get_days_before_today(self, days=1000):
         return datetime.now() - timedelta(days=days)
 
     def get_data(self, user_id, news_id, classification=None):

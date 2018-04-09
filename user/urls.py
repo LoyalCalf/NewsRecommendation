@@ -10,8 +10,8 @@ from user import views
 urlpatterns = [
     url(r'^login/', views.login),
     url(r'^register/', views.register),
-    url(r'^user_info/', views.user_info),
-    url(r'^user_change/', views.user_change),
+    url(r'^user/info/', views.user_info),
+    url(r'^user/setting/', views.user_change),
 
     url(r'^account/activate/(?P<token>[\w\-]+.[\w\-]+.[\w\-]+)/$', views.active_user.as_view(), name='active_user')
 ]

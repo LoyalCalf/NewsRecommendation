@@ -18,8 +18,9 @@ urlpatterns = [
 
     url(r'^user_behavior/$', views.UserBehavior.as_view()),
     url(r'^login/$', views.Login.as_view()),
+    url(r'^logout/$', views.Logout.as_view()),
     url(r'^register/$', views.Register.as_view()),
-    url(r'^user_profile/$', views.UserProfileSetting.as_view()),
+    url(r'^user_setting/$', views.UserProfileSetting.as_view()),
     url(r'^user_collection/$', views.UserCollection.as_view()),
 
     # url(r'^news_search/', include('haystack.urls')),
