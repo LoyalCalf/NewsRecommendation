@@ -25,9 +25,7 @@ SECRET_KEY = '19xl1&zv6%*=#15+!w-s%*(4!81%_ehv=@9%7+vv18k^+wl@k6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost:9000',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -83,27 +81,38 @@ REST_FRAMEWORK = {
     # ],
     # 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+
 }
 
 
 MIDDLEWARE = [
+
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+
 ]
 
 """跨域请求设置"""
 CORS_ORIGIN_WHITELIST = (
       'localhost:9000',
 )
+
 
 ROOT_URLCONF = 'NewsRecommendation.urls'
 
