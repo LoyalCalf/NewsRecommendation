@@ -11,7 +11,7 @@ from rest_framework import generics
 from algorithm.Recommendation import UserCF, ContentBased
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
@@ -21,6 +21,7 @@ from user.models import user_behavior, user_profile, user_tag_score, user_search
 from rest_framework.views import APIView
 from algorithm.Recommendation.genUserTag import UserTag
 from datetime import datetime, timedelta
+
 
 """News"""
 
@@ -264,10 +265,12 @@ class Login(APIView):
     """
 
     def post(self, request):
+
         try:
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = auth.authenticate(username=username, password=password)
+
             # print(make_password(password))
             # user = User.objects.get(username=username)
 
@@ -324,7 +327,7 @@ class Register(APIView):
             user = User.objects.create_user(username=username, password=password, email=email, is_active=True)
             # User.objects.create_user(username=username,password=password,email=email,is_active=False)
             # self._send_register_email(user)
-            #user.save()
+            # user.save()
             user_profile.objects.create(user_id=user.id, nickname=username)  # 注册完成同时添加额外信息，保证信息完整
             user_tag_score.objects.create(user_id=user.id)
             # user.save()
