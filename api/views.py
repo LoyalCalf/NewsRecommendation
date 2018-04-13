@@ -21,7 +21,7 @@ from user.models import user_behavior, user_profile, user_tag_score, user_search
 from rest_framework.views import APIView
 from algorithm.Recommendation.genUserTag import UserTag
 from datetime import datetime, timedelta
-
+import json
 
 """News"""
 
@@ -267,10 +267,10 @@ class Login(APIView):
     def post(self, request):
 
         try:
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            body = json.loads(request.body)
+            username = body["username"]
+            password = body["password"]
             user = auth.authenticate(username=username, password=password)
-
             # print(make_password(password))
             # user = User.objects.get(username=username)
 
@@ -278,7 +278,7 @@ class Login(APIView):
             # if check_password(password,user.password):
             if user:
                 auth.login(request, user)
-                return Response({'msg': '登陆成功', 'code': 200})
+                return Response({'msg': '登陆成功', 'code': 200, 'userid': user.id, 'username': user.username})
             else:
                 return Response({'msg': '密码错误', 'code': 300})
         except:
@@ -315,9 +315,10 @@ class Register(APIView):
 
     def post(self, request):
         try:
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            email = request.POST.get('email')
+            body = json.loads(request.body)
+            username = body["username"]
+            password = body["password"]
+            email = body["email"]
             user = User.objects.filter(username=username)
 
             # 暂时允许邮箱重复，便于测试
@@ -331,7 +332,7 @@ class Register(APIView):
             user_profile.objects.create(user_id=user.id, nickname=username)  # 注册完成同时添加额外信息，保证信息完整
             user_tag_score.objects.create(user_id=user.id)
             # user.save()
-            return Response({'msg': '注册成功,请尽快完成邮箱验证', 'code': 200})
+            return Response({'msg': '注册成功,请尽快完成邮箱验证', 'code': 200, 'username': user.username, 'userid': user.id})
         except:
             return Response({'msg': '错误', 'code': 300})
 
